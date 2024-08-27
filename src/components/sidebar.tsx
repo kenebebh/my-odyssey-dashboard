@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import React from "react";
 import Link from "next/link";
 
@@ -5,6 +8,14 @@ import { links } from "@/data/links";
 import { DashboardIcon } from "@radix-ui/react-icons";
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
+  const activeLinkStyles = "mb-1.5 pl-1 bg-primaryColor hover:text-white";
+  const linkStyles = "border-l-2 mb-1.5 pl-1";
+
+  // Function to determine if the link is active
+  const isActive = (href: string) => pathname === href;
+
   return (
     <div className="w-60 border-r h-screen overflow-auto py-3 pb-4 px-3">
       <div className="pb-3">
@@ -14,10 +25,15 @@ export default function Sidebar() {
       </div>
 
       <div>
-        <Link href="/">
+        <Link
+          href="/"
+          className={`rounded-sm shadow-md hover:text-primaryColor/90 ${
+            pathname === "/" ? activeLinkStyles : ""
+          }`}
+        >
           <section className="flex items-center gap-x-2 py-1">
             <section className="border border-[#ec9d9dc4] rounded-full p-1">
-              <DashboardIcon color="#0077B6" />
+              <DashboardIcon color={isActive("/") ? "#fff " : "#0077B6"} />
             </section>
             <p className="uppercase font-medium">Dashboard</p>
           </section>
@@ -33,14 +49,14 @@ export default function Sidebar() {
               </section>
               <section className="pl-8 pb-2">
                 {item.links?.map((link) => (
-                  <p>
-                    <Link
-                      href={`${link.href}`}
-                      className="border-l-2 mb-1.5 pl-1"
-                    >
-                      {link.name}
-                    </Link>
-                  </p>
+                  <Link
+                    href={`${link.href}`}
+                    className={`border-l-2 mb-1.5 pl-1 flex items-center rounded-sm shadow-md hover:text-primaryColor/90 ${
+                      pathname === link.href ? activeLinkStyles : ""
+                    }`}
+                  >
+                    <p className="">{link.name}</p>
+                  </Link>
 
                   // <p className="border-l-2 mb-1.5 pl-1 ">{link.name}</p>
                 ))}
