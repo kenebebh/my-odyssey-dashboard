@@ -9,85 +9,99 @@ import {
 } from "@radix-ui/react-icons";
 
 export const links = [
-  {
-    title: "Dashboard",
-    icon: <DashboardIcon />,
-  },
+  // {
+  //   title: "Dashboard",
+  //   icon: <DashboardIcon color="#0077B6" />,
+  // },
   {
     title: "User Management",
-    icon: <PersonIcon />,
+    icon: <PersonIcon color="#0077B6" />,
     links: [
       {
         name: "All Users",
+        href: "/user-management/all-users",
       },
       {
         name: "User Charts",
+        href: "/user-management/user-charts",
       },
       {
         name: "Demographics",
+        href: "/user-management/demographics",
       },
     ],
   },
   {
-    title: "Destination Management",
-    icon: <RocketIcon />,
+    title: "Destination MGT",
+    icon: <RocketIcon color="#0077B6" />,
     links: [
       {
         name: "Content Update",
+        href: "/destination-management/content-update",
       },
       {
         name: "Travel Trends",
+        href: "/destination-management/travel-trends",
       },
     ],
   },
   {
     title: "Operations",
-    icon: <LightningBoltIcon />,
+    icon: <LightningBoltIcon color="#0077B6" />,
     links: [
       {
         name: "Trips Management",
+        href: "/operations/trips-management",
       },
     ],
   },
   {
     title: "Content & Ads",
-    icon: <CardStackIcon />,
+    icon: <CardStackIcon color="#0077B6" />,
     links: [
       {
         name: "Ad Management",
+        href: "/content-ads/ad-management",
       },
       {
         name: "Ad Performance",
+        href: "/content-ads/ad-performance",
       },
       {
-        name: "Ad MSheduling",
+        name: "Ad Scheduling",
+        href: "/content-ads/ad-scheduling",
       },
       {
         name: "Content Performance",
+        href: "/content-ads/content-performance",
       },
       {
         name: "Content Management",
+        href: "/content-ads/content-management",
       },
     ],
   },
   {
     title: "Trips",
-    icon: <GlobeIcon />,
+    icon: <GlobeIcon color="#0077B6" />,
     links: [
       {
         name: "Trip Plans",
+        href: "trip-plans",
       },
     ],
   },
   {
     title: "Customer Support",
-    icon: <ArchiveIcon />,
+    icon: <ArchiveIcon color="#0077B6" />,
     links: [
       {
         name: "Support Tickets",
+        href: "support-tickets",
       },
       {
         name: "Frequent Issues Analysis",
+        href: "frequent-issues-analysis",
       },
     ],
   },

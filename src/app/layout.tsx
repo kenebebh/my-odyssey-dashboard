@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, DM_Sans } from "next/font/google";
+import { Sidebar } from "@/components";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const sans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "My Odyssey Dashboard",
@@ -16,7 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${sans.className}`}>
+        <section className="flex gap-x-4">
+          <div className="hidden lg:flex">
+            <Sidebar />
+          </div>
+
+          <div>{children}</div>
+        </section>
+      </body>
     </html>
   );
 }
