@@ -87,7 +87,7 @@ export const links = [
     links: [
       {
         name: "Trip Plans",
-        href: "trip-plans",
+        href: "/trips/trip-plans",
       },
     ],
   },
@@ -97,11 +97,11 @@ export const links = [
     links: [
       {
         name: "Support Tickets",
-        href: "support-tickets",
+        href: "/customer-support/support-tickets",
       },
       {
         name: "Frequent Issues Analysis",
-        href: "frequent-issues-analysis",
+        href: "/customer-support/frequent-issues-analysis",
       },
     ],
   },

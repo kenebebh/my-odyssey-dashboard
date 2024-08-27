@@ -16,7 +16,7 @@ export default function Sidebar() {
       <div>
         <Link href="/">
           <section className="flex items-center gap-x-2 py-1">
-            <section className="border border-{#fff] rounded-full p-1">
+            <section className="border border-[#ec9d9dc4] rounded-full p-1">
               <DashboardIcon color="#0077B6" />
             </section>
             <p className="uppercase font-medium">Dashboard</p>
@@ -26,7 +26,7 @@ export default function Sidebar() {
           return (
             <div>
               <section className="flex items-center gap-x-2 py-1">
-                <section className="border border-{#fff] rounded-full p-1">
+                <section className="border border-[#ec9d9dc4] rounded-full p-1">
                   {item.icon}
                 </section>
                 <p className="uppercase font-medium">{item.title}</p>
