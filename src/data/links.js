@@ -50,6 +50,10 @@ export const links = [
     icon: <LightningBoltIcon color="#0077B6" />,
     links: [
       {
+        name: "Employee Management",
+        href: "/operations/employee-management",
+      },
+      {
         name: "Trips Management",
         href: "/operations/trips-management",
       },
