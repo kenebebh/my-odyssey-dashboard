@@ -11,7 +11,6 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const activeLinkStyles = "mb-1.5 pl-1 bg-primaryColor hover:text-white";
-  const linkStyles = "border-l-2 mb-1.5 pl-1";
 
   // Function to determine if the link is active
   const isActive = (href: string) => pathname === href;

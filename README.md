@@ -1,37 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Odyssey Admin Dashboard
 
-## Getting Started
+Welcome to the My Odyssey Admin Dashboard repository. This project is built as the mockup dashboard of the **My Odyssey** travel app. It is designed to manage and analyze user operations, data, operations, app content, and advertisements effectively. The dashboard also provides a comprehensive view of key metrics, user engagement, and operational data to help administrators optimize the travel experience for users.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. User Management:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- View and manage user profiles, travel history, and engagement levels.
+- Visualize user demographics and travel preferences through interactive charts.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Destination Management:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Update and track local events, top experiences, and emerging travel trends.
+- Analyze the most popular destinations and optimize content accordingly.
 
-## Learn More
+3. Operations:
 
-To learn more about Next.js, take a look at the following resources:
+- Monitor and manage bookings, including pending, completed, and cancelled trips.
+- Evaluate customer satisfaction metrics and cancellation rates.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Content and Advertisements:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Manage and schedule advertisements, track their performance, and monitor eligibility.
+- Optimize content delivery and monitor engagement with various content types.
 
-## Deploy on Vercel
+5. Trips:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- View and manage user-created trip plans, including destinations, itineraries, and budgets.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# my-odyssey-dashboard
+6. Customer Support:
+
+- Handle support tickets efficiently, with options to sort by status and analyze frequent issues.
+
+## Tech Stack
+
+**Frontend:** React.js, Next.js, Typescript, Tailwind CSS
+State Management: Context API
+Data Visualization: Chart.js, shadcn charts
+API Handling: React Query, Axios, Zod
