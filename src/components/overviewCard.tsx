@@ -8,7 +8,7 @@ interface CardProps {
 
 export default function OverviewCard(item: CardProps) {
   return (
-    <div className="border pl-2 py-3 flex items-center w-60 justify-between h-28">
+    <div className="border rounded-sm shadow-md pl-2 py-3 flex items-center w-60 justify-between h-28">
       <div className="w-8">
         <div className="border border-accentGrey rounded-full p-2 flex justify-center items-center">
           {item.icon}

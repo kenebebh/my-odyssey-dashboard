@@ -14,7 +14,7 @@ export default function HomePage() {
         <OverviewCard
           title="Active Users"
           icon={<PersonIcon color="#0077B6" />}
-          value="500"
+          value="400"
         />
         <OverviewCard
           title="Total Wishlists Created"
