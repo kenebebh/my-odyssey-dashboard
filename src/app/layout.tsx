@@ -20,12 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${sans.className}`}>
-        <section className="flex gap-x-4">
+        <section className="flex">
           <div className="hidden lg:flex">
             <Sidebar />
           </div>
 
-          <div>{children}</div>
+          <div className="w-full">{children}</div>
         </section>
       </body>
     </html>

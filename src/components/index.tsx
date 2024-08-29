@@ -1,3 +1,4 @@
 import Sidebar from "./sidebar";
+import OverviewCard from "./overviewCard";
 
-export { Sidebar };
+export { Sidebar, OverviewCard };
