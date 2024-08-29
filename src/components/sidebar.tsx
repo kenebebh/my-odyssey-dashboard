@@ -10,7 +10,8 @@ import { DashboardIcon } from "@radix-ui/react-icons";
 export default function Sidebar() {
   const pathname = usePathname();
 
-  const activeLinkStyles = "mb-1.5 pl-1 bg-primaryColor hover:text-white";
+  const activeLinkStyles =
+    "mb-1.5 pl-1 bg-theme/80 text-[#f1f1ee] shadow-sm rounded-r";
 
   // Function to determine if the link is active
   const isActive = (href: string) => pathname === href;
@@ -18,40 +19,31 @@ export default function Sidebar() {
   return (
     <div className="w-60 border-r h-screen overflow-auto py-3 pb-4 px-3">
       <div className="pb-3">
-        <h1 className="font-sans text-3xl text-primaryColor italic">
-          My Odyssey
-        </h1>
+        <h1 className="font-sans text-3xl text-theme italic">My Odyssey</h1>
       </div>
 
       <div>
-        <Link
-          href="/"
-          //   className={`rounded-sm shadow-md ${
-          //     isActive("/") ? activeLinkStyles : "hover:text-primaryColor/90"
-          //   }`}
-        >
+        <Link href="/">
           <section
-            className={`flex items-center gap-x-2 pl-0.5 py-1 rounded-sm shadow-md ${
-              isActive("/")
-                ? "bg-primaryColor hover:text-white pl-0.5"
-                : "hover:text-primaryColor/90"
+            className={`flex items-center gap-x-2 pl-0.5 py-1 rounded-sm ${
+              isActive("/") ? "bg-theme/80 shadow-sm" : ""
             }`}
           >
             <section className="border border-[#ec9d9dc4] rounded-full p-1">
-              <DashboardIcon color={isActive("/") ? "#fff " : "#0077B6"} />
+              <DashboardIcon color={isActive("/") ? "#fff" : "#0077B6"} />
             </section>
             <p
               className={`uppercase font-medium ${
-                isActive("/") ? "text-white" : ""
+                isActive("/") ? "text-[#f1f1ee]" : ""
               }`}
             >
               Dashboard
             </p>
           </section>
         </Link>
-        {links.map((item) => {
+        {links.map((item, index) => {
           return (
-            <div>
+            <div key={index}>
               <section className="flex items-center gap-x-2 py-1 pl-0.5">
                 <section className="border border-[#ec9d9dc4] rounded-full p-1">
                   {item.icon}
@@ -62,8 +54,10 @@ export default function Sidebar() {
                 {item.links?.map((link) => (
                   <Link
                     href={`${link.href}`}
-                    className={`border-l-2 mb-1.5 pl-1 flex items-center rounded-sm shadow-md hover:text-primaryColor/90 ${
-                      pathname === link.href ? activeLinkStyles : ""
+                    className={`border-l-2 border-accentGrey mb-1.5 pl-1 flex items-center  ${
+                      pathname === link.href
+                        ? activeLinkStyles
+                        : "hover:text-theme/90"
                     }`}
                   >
                     <p className="">{link.name}</p>

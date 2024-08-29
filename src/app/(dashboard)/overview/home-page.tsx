@@ -1,6 +1,7 @@
 import React from "react";
 import { OverviewCard } from "@/components";
 import { PersonIcon } from "@radix-ui/react-icons";
+import { BarChartLabel } from "@/components/charts";
 
 export default function HomePage() {
   return (
@@ -28,7 +29,9 @@ export default function HomePage() {
         />
       </div>
 
-      <div></div>
+      <div>
+        <BarChartLabel />
+      </div>
       <div></div>
     </div>
   );
