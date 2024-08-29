@@ -18,18 +18,22 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "January", income: 1235 },
+  { month: "February", income: 1720 },
+  { month: "March", income: 1200 },
+  { month: "April", income: 1800 },
+  { month: "May", income: 1300 },
+  { month: "June", income: 1720 },
+  { month: "July", income: 1450 },
+  { month: "August", income: 1500 },
+  { month: "September", income: 1135 },
+  { month: "October", income: 1650 },
 ];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
+  income: {
+    label: "Income",
+    color: "#0077B6",
   },
 } satisfies ChartConfig;
 
@@ -61,7 +65,7 @@ export function BarChartLabel() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
+            <Bar dataKey="income" fill="#0077B6" radius={8}>
               <LabelList
                 position="top"
                 offset={12}
