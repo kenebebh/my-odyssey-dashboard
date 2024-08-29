@@ -26,21 +26,33 @@ export default function Sidebar() {
       <div>
         <Link
           href="/"
-          className={`rounded-sm shadow-md hover:text-primaryColor/90 ${
-            pathname === "/" ? activeLinkStyles : ""
-          }`}
+          //   className={`rounded-sm shadow-md ${
+          //     isActive("/") ? activeLinkStyles : "hover:text-primaryColor/90"
+          //   }`}
         >
-          <section className="flex items-center gap-x-2 py-1">
+          <section
+            className={`flex items-center gap-x-2 pl-0.5 py-1 rounded-sm shadow-md ${
+              isActive("/")
+                ? "bg-primaryColor hover:text-white pl-0.5"
+                : "hover:text-primaryColor/90"
+            }`}
+          >
             <section className="border border-[#ec9d9dc4] rounded-full p-1">
               <DashboardIcon color={isActive("/") ? "#fff " : "#0077B6"} />
             </section>
-            <p className="uppercase font-medium">Dashboard</p>
+            <p
+              className={`uppercase font-medium ${
+                isActive("/") ? "text-white" : ""
+              }`}
+            >
+              Dashboard
+            </p>
           </section>
         </Link>
         {links.map((item) => {
           return (
             <div>
-              <section className="flex items-center gap-x-2 py-1">
+              <section className="flex items-center gap-x-2 py-1 pl-0.5">
                 <section className="border border-[#ec9d9dc4] rounded-full p-1">
                   {item.icon}
                 </section>
