@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         primaryColor: "#0077B6",
+        accentGrey: "#2F4F4F",
       },
     },
   },

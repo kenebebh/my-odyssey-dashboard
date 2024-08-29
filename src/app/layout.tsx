@@ -25,7 +25,7 @@ export default function RootLayout({
             <Sidebar />
           </div>
 
-          <div className="w-full">{children}</div>
+          <div className="max-w-full p-2">{children}</div>
         </section>
       </body>
     </html>
