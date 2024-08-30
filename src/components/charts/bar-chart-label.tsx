@@ -17,18 +17,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [
-  { month: "January", income: 1235 },
-  { month: "February", income: 1720 },
-  { month: "March", income: 1200 },
-  { month: "April", income: 1800 },
-  { month: "May", income: 1300 },
-  { month: "June", income: 1720 },
-  { month: "July", income: 1450 },
-  { month: "August", income: 1500 },
-  { month: "September", income: 1135 },
-  { month: "October", income: 1650 },
-];
 
 const chartConfig = {
   income: {
@@ -37,12 +25,12 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function BarChartLabel() {
+export function BarChartLabel({ chartData }: { chartData: {}[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Revenue Chart</CardTitle>
+        <CardDescription>January - Present 2024</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -77,11 +65,11 @@ export function BarChartLabel() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
+        {/* <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
+        </div> */}
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing total revenue for the year 2024
         </div>
       </CardFooter>
     </Card>

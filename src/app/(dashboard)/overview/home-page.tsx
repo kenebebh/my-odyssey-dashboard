@@ -1,11 +1,10 @@
 import React from "react";
-import { OverviewCard } from "@/components";
+import { OverviewCard, RevenueCard } from "@/components";
 import { PersonIcon } from "@radix-ui/react-icons";
-import { BarChartLabel } from "@/components/charts";
 
 export default function HomePage() {
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col gap-y-10">
       <div className="flex gap-x-2 items-center">
         <OverviewCard
           title="Total Users"
@@ -30,7 +29,7 @@ export default function HomePage() {
       </div>
 
       <div>
-        <BarChartLabel />
+        <RevenueCard />
       </div>
       <div></div>
     </div>
