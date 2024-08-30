@@ -17,7 +17,7 @@ export default function Sidebar() {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <div className="w-60 border-r h-screen overflow-auto py-3 pb-4 px-3">
+    <div className="w-60 border-r min-h-screen overflow-auto py-3 pb-4 px-3">
       <div className="pb-3">
         <h1 className="font-sans text-3xl text-theme italic">My Odyssey</h1>
       </div>

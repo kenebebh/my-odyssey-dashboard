@@ -3,6 +3,7 @@ import {
   OverviewCard,
   RevenueCard,
   MostVisitedCountriesChart,
+  RevenueVsExpensesChart,
 } from "@/components";
 import { PersonIcon } from "@radix-ui/react-icons";
 
@@ -39,7 +40,9 @@ export default function HomePage() {
 
         <MostVisitedCountriesChart />
       </div>
-      <div></div>
+      <div>
+        <RevenueVsExpensesChart />
+      </div>
     </div>
   );
 }

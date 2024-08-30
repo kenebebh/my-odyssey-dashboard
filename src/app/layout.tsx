@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} ${sans.className}`}>
         <section className="flex">
-          <div className="hidden lg:flex">
+          <div className="hidden lg:flex relative">
             <Sidebar />
           </div>
 

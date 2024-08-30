@@ -3,7 +3,7 @@ import RevenueBarChart from "./revenue-bar-chart";
 
 export default function RevenueCard() {
   return (
-    <div className="w-[28rem] border rounded-sm">
+    <div className="w-[32rem] border rounded-sm">
       <RevenueBarChart />
     </div>
   );
