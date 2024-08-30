@@ -1,6 +1,12 @@
 import React from "react";
-import { OverviewCard, RevenueCard } from "@/components";
+import {
+  OverviewCard,
+  RevenueCard,
+  MostVisitedCountriesChart,
+} from "@/components";
 import { PersonIcon } from "@radix-ui/react-icons";
+
+import { PieChartLabel } from "@/components/charts/pie-chart-label";
 
 export default function HomePage() {
   return (
@@ -28,8 +34,10 @@ export default function HomePage() {
         />
       </div>
 
-      <div>
+      <div className="flex justify-between">
         <RevenueCard />
+
+        <MostVisitedCountriesChart />
       </div>
       <div></div>
     </div>
