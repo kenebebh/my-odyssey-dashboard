@@ -53,6 +53,7 @@ export default function Sidebar() {
               <section className="pl-8 pb-2">
                 {item.links?.map((link) => (
                   <Link
+                    key={link.name}
                     href={`${link.href}`}
                     className={`border-l-2 border-accentGrey mb-1.5 pl-1 flex items-center  ${
                       pathname === link.href

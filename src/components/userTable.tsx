@@ -96,10 +96,6 @@ export default function UserTable() {
         ),
         header: "User Image",
       }),
-      columnHelper.accessor("username", {
-        cell: (info) => <span>{info.getValue()}</span>,
-        header: "Full Name",
-      }),
       columnHelper.accessor("location", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Location",
