@@ -43,7 +43,7 @@ export default function Sidebar() {
         </Link>
         {links.map((item, index) => {
           return (
-            <div key={index}>
+            <div key={item.title}>
               <section className="flex items-center gap-x-2 py-1 pl-0.5">
                 <section className="border border-[#ec9d9dc4] rounded-full p-1">
                   {item.icon}
