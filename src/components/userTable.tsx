@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-
+import React, { useState } from "react";
 import { USERS as InitialUsers, UserType } from "../data/user-data";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 import {
   Column,
@@ -21,11 +21,7 @@ import {
 } from "@tanstack/react-table";
 
 // A TanStack fork of Kent C. Dodds' match-sorter library that provides ranking information
-import {
-  RankingInfo,
-  rankItem,
-  compareItems,
-} from "@tanstack/match-sorter-utils";
+import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
 
 declare module "@tanstack/react-table" {
   //add fuzzy filter to the filterFns
@@ -49,22 +45,6 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 
   // Return if the item should be filtered in/out
   return itemRank.passed;
-};
-
-// Define a custom fuzzy sort function that will sort by rank if the row has ranking information
-const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
-  let dir = 0;
-
-  // Only sort by rank if the column has ranking information
-  if (rowA.columnFiltersMeta[columnId]) {
-    dir = compareItems(
-      rowA.columnFiltersMeta[columnId]?.itemRank!,
-      rowB.columnFiltersMeta[columnId]?.itemRank!
-    );
-  }
-
-  // Provide an alphanumeric fallback for when the item ranks are equal
-  return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir;
 };
 
 export default function UserTable() {
@@ -149,13 +129,16 @@ export default function UserTable() {
 
   return (
     <div className="p-2">
-      <div>
-        <DebouncedInput
-          value={globalFilter ?? ""}
-          onChange={(value) => setGlobalFilter(String(value))}
-          className="p-2 font-lg shadow border border-block"
-          placeholder="Search all columns..."
-        />
+      <div className="w-full flex items-center gap-1">
+        <div className="p-2 font-lg shadow border border-block flex items-center gap-x-3 rounded-sm">
+          <MagnifyingGlassIcon />
+          <DebouncedInput
+            value={globalFilter ?? ""}
+            onChange={(value) => setGlobalFilter(String(value))}
+            className="text-purple-600"
+            placeholder="Search all columns..."
+          />
+        </div>
       </div>
       <div className="h-2" />
       <table>
@@ -199,7 +182,6 @@ export default function UserTable() {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => {
-            console.log(row);
             return (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => {
@@ -280,12 +262,6 @@ export default function UserTable() {
         </select>
       </div>
       <div>{table.getPrePaginationRowModel().rows.length} Rows</div>
-      {/* <div>
-        <button onClick={() => rerender()}>Force Rerender</button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => refreshData()}>Refresh Data</button>
-      </div> */}
       <pre>
         {JSON.stringify(
           {
