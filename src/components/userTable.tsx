@@ -154,7 +154,7 @@ export default function UserTable() {
                   <th
                     key={header.id}
                     colSpan={header.colSpan}
-                    className="capitalize py-2"
+                    className="capitalize pl-0.5 py-2 bg-gray-400 rounded-t-md"
                   >
                     {header.isPlaceholder ? null : (
                       <>
@@ -199,7 +199,7 @@ export default function UserTable() {
               >
                 {row.getVisibleCells().map((cell) => {
                   return (
-                    <td key={cell.id} className="px-3.5 py-2">
+                    <td key={cell.id} className="px-3.5 py-2 border-r-2">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
