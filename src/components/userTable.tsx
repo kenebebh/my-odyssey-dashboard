@@ -133,13 +133,16 @@ export default function UserTable() {
 
   return (
     <div className="p-2">
-      <div className="w-full flex items-center gap-1">
-        <div className="p-2 font-lg shadow border border-block flex items-center gap-x-3 rounded-sm">
+      <div className="w-full flex items-center justify-between gap-1 pl-2 pr-5 mb-6">
+        <div>
+          <h1 className="text-4xl font-bold text-theme">All Users</h1>
+        </div>
+        <div className="p-2 px-4 font-lg shadow border border-block flex items-center gap-x-3 rounded-sm">
           <MagnifyingGlassIcon />
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}
-            className="text-purple-600"
+            className="focus:outline-none"
             placeholder="Search all columns..."
           />
         </div>
@@ -154,14 +157,14 @@ export default function UserTable() {
                   <th
                     key={header.id}
                     colSpan={header.colSpan}
-                    className="capitalize pl-0.5 py-2 bg-gray-400 rounded-t-md"
+                    className="capitalize pl-2 py-3 bg-gray-200"
                   >
                     {header.isPlaceholder ? null : (
                       <>
                         <div
                           {...{
                             className: header.column.getCanSort()
-                              ? "cursor-pointer select-none"
+                              ? "cursor-pointer select-none flex items-center gap-x-3 hover:underline"
                               : "",
                             onClick: header.column.getToggleSortingHandler(),
                           }}
@@ -171,15 +174,18 @@ export default function UserTable() {
                             header.getContext()
                           )}
                           {{
-                            asc: " 🔼",
-                            desc: " 🔽",
+                            asc: (
+                              <span className="">
+                                <ArrowUpIcon fill="#2F4F4F" />
+                              </span>
+                            ),
+                            desc: (
+                              <span className="">
+                                <ArrowDownIcon fill="#2F4F4F" />
+                              </span>
+                            ),
                           }[header.column.getIsSorted() as string] ?? null}
                         </div>
-                        {header.column.getCanFilter() ? (
-                          <div>
-                            <Filter column={header.column} />
-                          </div>
-                        ) : null}
                       </>
                     )}
                   </th>
@@ -193,13 +199,14 @@ export default function UserTable() {
             return (
               <tr
                 key={row.id}
-                className={`
-                ${i % 2 === 0 ? "bg-gray-300" : "bg-gray-200"}
-                `}
+                // className={`
+                // ${i % 2 === 0 ? "bg-gray-300" : "bg-gray-200"}
+                // `}
+                className="border-b"
               >
                 {row.getVisibleCells().map((cell) => {
                   return (
-                    <td key={cell.id} className="px-3.5 py-2 border-r-2">
+                    <td key={cell.id} className="px-3.5 py-2">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -214,7 +221,7 @@ export default function UserTable() {
       </table>
 
       {/* pagination */}
-      <div className="flex items-center justify-end mt-2 gap-2">
+      <div className="flex items-center justify-end mt-4 gap-2">
         <button
           onClick={() => {
             table.previousPage();
@@ -271,19 +278,19 @@ export default function UserTable() {
   );
 }
 
-function Filter({ column }: { column: Column<any, unknown> }) {
-  const columnFilterValue = column.getFilterValue();
+// function Filter({ column }: { column: Column<any, unknown> }) {
+//   const columnFilterValue = column.getFilterValue();
 
-  return (
-    <DebouncedInput
-      type="text"
-      value={(columnFilterValue ?? "") as string}
-      onChange={(value) => column.setFilterValue(value)}
-      placeholder={`Search...`}
-      className="w-36 border shadow rounded"
-    />
-  );
-}
+//   return (
+//     <DebouncedInput
+//       type="text"
+//       value={(columnFilterValue ?? "") as string}
+//       onChange={(value) => column.setFilterValue(value)}
+//       placeholder={`Search...`}
+//       className="w-36 border shadow rounded"
+//     />
+//   );
+// }
 
 // A typical debounced input react component
 function DebouncedInput({
