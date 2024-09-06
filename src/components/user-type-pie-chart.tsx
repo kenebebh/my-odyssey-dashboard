@@ -10,18 +10,18 @@ interface UserTypeData {
 
 const userTypeData: UserTypeData[] = [
   {
-    userType: "budget Travelers",
+    userType: "Budget Travelers",
     number: 2275,
-    fill: "var(--color-budgetTravelers)",
+    fill: "#fb923c",
   },
   { userType: "affluent", number: 2000, fill: "var(--color-affluent)" },
-  { userType: "Adventure Seekers", number: 1872, fill: "var(--color-greece)" },
+  { userType: "Adventure Seekers", number: 1872, fill: "#5ffa74" },
   {
     userType: "Cultural Enthusiasts",
     number: 1731,
-    fill: "var(--color-mexico)",
+    fill: "#4430fc",
   },
-  { userType: "Frequent Travelers", number: 1200, fill: "var(--color-italy)" },
+  { userType: "Frequent Travelers", number: 1200, fill: "#1d6b75" },
 ];
 
 const chartConfig: ChartConfig = {
@@ -30,7 +30,7 @@ const chartConfig: ChartConfig = {
   },
   "Budget Travelers": {
     label: "Budget Travelers",
-    color: "#fb923c",
+    color: "hsl(var(--chart-1))",
   },
   affluent: {
     label: "Affluent",
@@ -52,13 +52,15 @@ const chartConfig: ChartConfig = {
 
 export default function UserTypePieChart() {
   return (
-    <PieChartLabel
-      chartData={userTypeData}
-      chartConfig={chartConfig}
-      dataKey="number"
-      nameKey="userType"
-      title="Types of Travelers"
-      description="April - September 2024"
-    />
+    <div className="w-[32rem]">
+      <PieChartLabel
+        chartData={userTypeData}
+        chartConfig={chartConfig}
+        dataKey="number"
+        nameKey="userType"
+        title="Types of Travelers"
+        description="April - September 2024"
+      />
+    </div>
   );
 }
