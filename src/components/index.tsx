@@ -5,6 +5,7 @@ import MostVisitedCountriesChart from "./most-visited-countries-chart";
 import RevenueVsExpensesChart from "./revenue-vs-expenses-chart";
 import UserTable from "./userTable";
 import UserTypePieChart from "./user-type-pie-chart";
+import UserEngagementPieChart from "./user-engagement-pie-chart";
 
 export {
   Sidebar,
@@ -14,4 +15,5 @@ export {
   RevenueVsExpensesChart,
   UserTable,
   UserTypePieChart,
+  UserEngagementPieChart,
 };

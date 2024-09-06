@@ -52,7 +52,7 @@ const chartConfig: ChartConfig = {
 
 export default function UserTypePieChart() {
   return (
-    <div className="w-[32rem]">
+    <div className="w-[30rem]">
       <PieChartLabel
         chartData={userTypeData}
         chartConfig={chartConfig}

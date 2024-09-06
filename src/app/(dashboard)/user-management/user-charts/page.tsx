@@ -1,10 +1,12 @@
 import React from "react";
-import { UserTypePieChart } from "@/components";
+import { UserEngagementPieChart, UserTypePieChart } from "@/components";
 
 export default function UserCharts() {
   return (
-    <div>
+    <div className="pt-4 pl-2 flex justify-between flex-wrap gap-x-4 gap-y-5 pr-4">
       <UserTypePieChart />
+
+      <UserEngagementPieChart />
     </div>
   );
 }
