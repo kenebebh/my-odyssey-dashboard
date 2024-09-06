@@ -4,6 +4,7 @@ import RevenueCard from "./revenue-card";
 import MostVisitedCountriesChart from "./most-visited-countries-chart";
 import RevenueVsExpensesChart from "./revenue-vs-expenses-chart";
 import UserTable from "./userTable";
+import UserTypePieChart from "./user-type-pie-chart";
 
 export {
   Sidebar,
@@ -12,4 +13,5 @@ export {
   MostVisitedCountriesChart,
   RevenueVsExpensesChart,
   UserTable,
+  UserTypePieChart,
 };

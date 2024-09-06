@@ -1,5 +1,10 @@
 import React from "react";
+import { UserTypePieChart } from "@/components";
 
 export default function UserCharts() {
-  return <div>Hello from User Charts</div>;
+  return (
+    <div>
+      <UserTypePieChart />
+    </div>
+  );
 }
