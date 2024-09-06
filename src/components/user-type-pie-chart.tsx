@@ -1,27 +1,3 @@
-// import React from "react";
-// import { PieChartLabel } from "./charts";
-
-// const userTypeData = [
-//   { userType: "Budget Travelers", number: 2275, fill: "var(--color-france)" },
-//   { userType: "Affluent", number: 2000, fill: "var(--color-germany)" },
-//   { userType: "Adventure Seekers", number: 1872, fill: "var(--color-greece)" },
-//   {
-//     userType: "Cultural Enthusiasts",
-//     number: 1731,
-//     fill: "var(--color-mexico)",
-//   },
-//   { userType: "Frequent Travelers", number: 1200, fill: "var(--color-italy)" },
-// ];
-
-// export default function UserTypePieChart() {
-//   return (
-//     <div>
-//       {/* <PieChartLabel chartData={userTypeData} /> */}
-//       <p>Hllo from hart</p>
-//     </div>
-//   );
-// }
-
 import React from "react";
 import { PieChartLabel } from "./charts";
 import { ChartConfig } from "./ui/chart";
@@ -33,8 +9,12 @@ interface UserTypeData {
 }
 
 const userTypeData: UserTypeData[] = [
-  { userType: "Budget Travelers", number: 2275, fill: "var(--color-france)" },
-  { userType: "Affluent", number: 2000, fill: "var(--color-affluent)" },
+  {
+    userType: "budget Travelers",
+    number: 2275,
+    fill: "var(--color-budgetTravelers)",
+  },
+  { userType: "affluent", number: 2000, fill: "var(--color-affluent)" },
   { userType: "Adventure Seekers", number: 1872, fill: "var(--color-greece)" },
   {
     userType: "Cultural Enthusiasts",
@@ -50,9 +30,9 @@ const chartConfig: ChartConfig = {
   },
   "Budget Travelers": {
     label: "Budget Travelers",
-    color: "hsl(var(--chart-1))",
+    color: "#fb923c",
   },
-  Affluent: {
+  affluent: {
     label: "Affluent",
     color: "hsl(var(--chart-2))",
   },

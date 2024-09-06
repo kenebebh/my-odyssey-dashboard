@@ -37,6 +37,9 @@ export function PieChartLabel<T>({
   title,
   description,
 }: PieChartLabelProps<T>) {
+  console.log("ChartData:" + JSON.stringify(chartData));
+  console.dir("ChartConfig:" + JSON.stringify(chartConfig));
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
