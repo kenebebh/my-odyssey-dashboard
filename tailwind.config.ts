@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontSize: {
+        base: "20px", // This sets the base font size
+      },
       colors: {
         accentGrey: "#2F4F4F",
         theme: "#0077B6",

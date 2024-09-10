@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${sans.className}`}>
-        <section className="grid grid-cols-1 lg:grid-cols-[240px,1fr]">
+        <section className="grid grid-cols-1 lg:grid-cols-[290px,1fr]">
           <div className="hidden lg:flex">
             <Sidebar />
           </div>

@@ -49,7 +49,7 @@ export function PieChartLabel<T>({
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[350px]"
+          className="mx-auto aspect-square max-h-[380px]"
         >
           <PieChart>
             <ChartTooltip
@@ -62,7 +62,7 @@ export function PieChartLabel<T>({
                 dataKey={nameKey as string}
                 className="fill-background"
                 stroke="none"
-                fontSize={12}
+                fontSize={14}
                 formatter={(value: keyof typeof chartConfig) =>
                   chartConfig[value]?.label
                 }
