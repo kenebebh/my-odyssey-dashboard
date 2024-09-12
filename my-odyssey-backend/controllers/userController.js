@@ -7,6 +7,7 @@ const getUsers = (req, res) => {
 //controller to get a specific user by ID
 //public access
 const getUser = (req, res) => {
+  console.log(res);
   res.json({ message: `Get user details for ${req.params.id}` });
 };
 
