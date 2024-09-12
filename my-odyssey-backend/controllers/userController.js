@@ -1,19 +1,21 @@
+const asyncHandler = require("express-async-handler");
+
 //controller to get all users
 //public access
-const getUsers = (req, res) => {
+const getUsers = asyncHandler(async (req, res) => {
   res.json({ message: "Get all users" });
-};
+});
 
 //controller to get a specific user by ID
 //public access
-const getUser = (req, res) => {
+const getUser = asyncHandler(async (req, res) => {
   console.log(res);
   res.json({ message: `Get user details for ${req.params.id}` });
-};
+});
 
 //controller to create a new user
 //public access
-const createUser = (req, res) => {
+const createUser = asyncHandler(async (req, res) => {
   console.log("The request body is:", req.body);
   const { username, email, userImage, location } = req.body;
   if (!username || !email || !location) {
@@ -21,18 +23,18 @@ const createUser = (req, res) => {
     throw new Error("Please fill all required fields");
   }
   res.json({ message: "Create a new user" });
-};
+});
 
 //controller to update a users details
 //public access
-const updateUser = (req, res) => {
+const updateUser = asyncHandler(async (req, res) => {
   res.json({ message: `Update user details for ${req.params.id}` });
-};
+});
 
 //controller to delete a user
 //public access
-const deleteUser = (req, res) => {
+const deleteUser = asyncHandler(async (req, res) => {
   res.json({ message: `Delete user ${req.params.id}` });
-};
+});
 
 module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };
