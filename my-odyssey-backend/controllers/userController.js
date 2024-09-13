@@ -11,14 +11,18 @@ const getUsers = asyncHandler(async (req, res) => {
 //controller to get a specific user by ID
 //public access
 const getUser = asyncHandler(async (req, res) => {
-  console.log(res);
-  res.json({ message: `Get user details for ${req.params.id}` });
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
+
+  res.status(200).json(user);
 });
 
 //controller to create a new user
 //public access
 const createUser = asyncHandler(async (req, res) => {
-  console.log("The request body is:", req.body);
   const { username, email, userImage, location } = req.body;
   if (!username || !email || !location) {
     res.status(400);
@@ -37,13 +41,22 @@ const createUser = asyncHandler(async (req, res) => {
 //controller to update a users details
 //public access
 const updateUser = asyncHandler(async (req, res) => {
-  res.json({ message: `Update user details for ${req.params.id}` });
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  res.status(200).json(updatedUser);
 });
 
 //controller to delete a user
 //public access
 const deleteUser = asyncHandler(async (req, res) => {
-  res.json({ message: `Delete user ${req.params.id}` });
+  res.status(200).json({ message: `Delete user ${req.params.id}` });
 });
 
 module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };
