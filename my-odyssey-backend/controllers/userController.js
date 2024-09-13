@@ -1,9 +1,11 @@
 const asyncHandler = require("express-async-handler");
+const User = require("../models/userModel");
 
 //controller to get all users
 //public access
 const getUsers = asyncHandler(async (req, res) => {
-  res.json({ message: "Get all users" });
+  const users = await User.find();
+  res.json(users);
 });
 
 //controller to get a specific user by ID
@@ -22,7 +24,14 @@ const createUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please fill all required fields");
   }
-  res.json({ message: "Create a new user" });
+
+  const user = await User.create({
+    username,
+    email,
+    userImage,
+    location,
+  });
+  res.json(user);
 });
 
 //controller to update a users details
