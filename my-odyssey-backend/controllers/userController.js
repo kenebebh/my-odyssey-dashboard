@@ -56,7 +56,14 @@ const updateUser = asyncHandler(async (req, res) => {
 //controller to delete a user
 //public access
 const deleteUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete user ${req.params.id}` });
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
+
+  await User.findByIdAndDelete(req.params.id);
+  res.status(200).json({ message: `Deleted user ${req.params.id}` });
 });
 
 module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };
