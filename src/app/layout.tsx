@@ -5,8 +5,8 @@ import { TanstackProvider } from "@/providers";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-const sans = DM_Sans({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+const sans = DM_Sans({ subsets: ["latin"], display: "swap"  });
 
 export const metadata: Metadata = {
   title: "My Odyssey Dashboard",
@@ -31,6 +31,6 @@ export default function RootLayout({
           </section>
         </body>
       </html>
-    </TanstackProvider>
+     </TanstackProvider>
   );
 }
