@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { USERS as InitialUsers, UserType } from "../data/user-data";
 import { usersQuery, UsersAdapter } from "@/adapters";
 import { IUser } from "@/lib/types/user";
 import {
@@ -11,18 +10,15 @@ import {
 } from "@radix-ui/react-icons";
 
 import {
-  Column,
   ColumnDef,
   ColumnFiltersState,
   createColumnHelper,
   FilterFn,
-  SortingFn,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  sortingFns,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -62,12 +58,11 @@ export default function UserTable() {
 
   console.log(users);
 
-  const columnHelper = createColumnHelper<UserType>();
-
+  const columnHelper = createColumnHelper<IUser>();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
 
-  const columns = React.useMemo<ColumnDef<UserType, any>[]>(
+  const columns = React.useMemo<ColumnDef<IUser, any>[]>(
     () => [
       {
         header: "Serial Number",
@@ -108,11 +103,10 @@ export default function UserTable() {
     []
   );
 
-  const [data] = React.useState<UserType[]>(InitialUsers);
-  // const [data] = React.useState<IUser[]>(users);
+  const [data] = React.useState<IUser[]>(users!);
 
   const table = useReactTable({
-    data,
+    data: users || [],
     columns,
     filterFns: {
       fuzzy: fuzzyFilter, //define as a filter function that can be used in column definitions
@@ -141,6 +135,10 @@ export default function UserTable() {
       }
     }
   }, [table.getState().columnFilters[0]?.id]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // You can replace this with a spinner component
+  }
 
   return (
     <div className="p-2">
@@ -208,13 +206,7 @@ export default function UserTable() {
         <tbody>
           {table.getRowModel().rows.map((row, i) => {
             return (
-              <tr
-                key={row.id}
-                // className={`
-                // ${i % 2 === 0 ? "bg-gray-300" : "bg-gray-200"}
-                // `}
-                className="border-b"
-              >
+              <tr key={row.id} className="border-b">
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td key={cell.id} className="px-3.5 py-2">
@@ -248,9 +240,7 @@ export default function UserTable() {
           }}
           disabled={!table.getCanNextPage()}
           className="p-1 border border-gray-300 px-2 disabled:opacity-30"
-        >
-          {">"}
-        </button>
+        ></button>
 
         <span className="flex items-center gap-1">
           <div>Page</div>
@@ -289,20 +279,6 @@ export default function UserTable() {
   );
 }
 
-// function Filter({ column }: { column: Column<any, unknown> }) {
-//   const columnFilterValue = column.getFilterValue();
-
-//   return (
-//     <DebouncedInput
-//       type="text"
-//       value={(columnFilterValue ?? "") as string}
-//       onChange={(value) => column.setFilterValue(value)}
-//       placeholder={`Search...`}
-//       className="w-36 border shadow rounded"
-//     />
-//   );
-// }
-
 // A typical debounced input react component
 function DebouncedInput({
   value: initialValue,
@@ -336,39 +312,3 @@ function DebouncedInput({
     />
   );
 }
-
-// import { usersQuery, UsersAdapter } from "@/adapters";
-// import { IUser } from "@/lib/types/user";
-// import { useQuery } from "@tanstack/react-query";
-
-// export default function userTable() {
-//   const {
-//     data: users,
-//     isPending,
-//     error,
-//     isFetching,
-//   } = useQuery({
-//     queryKey: ["repo"],
-//     queryFn: async () => {
-//       const response = await fetch(
-//         "https://api.github.com/repos/TanStack/query"
-//       );
-//       return await response.json();
-//     },
-//   });
-
-//   if (isPending) return "Loading...";
-
-//   if (error) return "An error has occurred: " + error.message;
-
-//   return (
-//     <div>
-//       <h1>{users.full_name}</h1>
-//       <p>{users.description}</p>
-//       <strong>👀 {users.subscribers_count}</strong>{" "}
-//       <strong>✨ {users.stargazers_count}</strong>{" "}
-//       <strong>🍴 {users.forks_count}</strong>
-//       <div>{isFetching ? "Updating..." : ""}</div>
-//     </div>
-//   );
-// }
