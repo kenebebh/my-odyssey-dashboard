@@ -66,7 +66,7 @@ export default function UserTable() {
     () => [
       {
         header: "Serial Number",
-        accessorKey: "serialNo",
+        cell: (info) => info.row.index + 1, // Use row.index to generate the serial number dynamically
         filterFn: "equalsString", //note: normal non-fuzzy filter column - exact match required
       },
       {
