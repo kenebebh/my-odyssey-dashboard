@@ -89,7 +89,7 @@ export default function UserTable() {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Location",
       }),
-      columnHelper.accessor("dateJoined", {
+      columnHelper.accessor("createdAt", {
         cell: (info) => (
           <span>{new Date(info.getValue()).toLocaleDateString()}</span>
         ),
