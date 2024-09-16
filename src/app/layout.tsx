@@ -6,7 +6,7 @@ import { TanstackProvider } from "@/providers";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
-const sans = DM_Sans({ subsets: ["latin"], display: "swap"  });
+const sans = DM_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "My Odyssey Dashboard",
@@ -19,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TanstackProvider>
-      <html lang="en">
-        <body className={`${inter.className} ${sans.className}`}>
+    <html lang="en">
+      <body className={`${inter.className} ${sans.className}`}>
+        <TanstackProvider>
           <section className="grid grid-cols-1 lg:grid-cols-[290px,1fr]">
             <div className="hidden lg:flex">
               <Sidebar />
@@ -29,8 +29,8 @@ export default function RootLayout({
 
             <div className="max-w-full p-2">{children}</div>
           </section>
-        </body>
-      </html>
-     </TanstackProvider>
+        </TanstackProvider>
+      </body>
+    </html>
   );
 }
