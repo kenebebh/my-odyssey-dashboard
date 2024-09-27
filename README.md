@@ -32,9 +32,17 @@ Welcome to the My Odyssey Admin Dashboard repository. This project is built as t
 
 - Handle support tickets efficiently, with options to sort by status and analyze frequent issues.
 
+7. CRUD Functionality:
+
+- Forms are implemented for creating and editing data (e.g., destinations, users, ads).
+- TanStack Query is used for efficient data fetching, as well as sending data to the backend, caching, effective query state management, and many more.
+- Zod is used for schema validation, ensuring data consistency and error prevention.
+
 ## Tech Stack
 
 **Frontend:** React.js, Next.js, Typescript, Tailwind CSS
-State Management: Context API
-Data Visualization: Chart.js, shadcn charts
-API Handling: React Query, Axios, Zod
+**State Management:** Context API
+**Data Visualization:** Chart.js, shadcn charts
+**API Handling:** React Query, Axios, Zod
+**Backend:** Node.js, Express.js, MongoDB
+**Database:** MongoDB
