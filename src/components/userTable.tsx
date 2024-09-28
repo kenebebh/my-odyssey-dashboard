@@ -8,7 +8,7 @@ import {
   ArrowUpIcon,
   ArrowDownIcon,
 } from "@radix-ui/react-icons";
-
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -56,7 +56,7 @@ export default function UserTable() {
     ""
   );
 
-  console.log(users);
+  // console.log(users);
 
   const columnHelper = createColumnHelper<IUser>();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -137,7 +137,17 @@ export default function UserTable() {
   }, [table.getState().columnFilters[0]?.id]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // You can replace this with a spinner component
+    return (
+      <div className="space-y-2">
+        <div className="w-full flex items-center justify-between gap-1 pl-2 pr-5 mb-6">
+          <div>
+            <Skeleton className="h-20 w-[200px]" />
+          </div>
+          <Skeleton className="h-20 w-[300px]" />
+        </div>
+        <Skeleton className="h-[70vh] w-full" />
+      </div>
+    );
   }
 
   return (
