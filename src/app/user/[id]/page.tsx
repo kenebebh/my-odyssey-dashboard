@@ -1,9 +1,6 @@
 import React from "react";
+import { UserDetailsPage } from "@/components";
 
 export default function UserDetails({ params }: { params: { id: string } }) {
-  return (
-    <div>
-      <p>User {params.id}</p>
-    </div>
-  );
+  return <UserDetailsPage userID={params.id} />;
 }

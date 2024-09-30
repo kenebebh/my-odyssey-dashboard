@@ -34,6 +34,10 @@ const UsersAdapter = {
     const res = await usersService.getAll("/");
     return res;
   },
+  getUserDetails: async function (id: string) {
+    const data = await usersService.getById(`${id}`);
+    return data;
+  },
 };
 
 export { usersMutation, usersQuery, UsersAdapter };

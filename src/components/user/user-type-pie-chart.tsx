@@ -1,6 +1,6 @@
 import React from "react";
-import { PieChartLabel } from "./charts";
-import { ChartConfig } from "./ui/chart";
+import { PieChartLabel } from "../charts";
+import { ChartConfig } from "../ui/chart";
 
 interface UserTypeData {
   userType: string;
