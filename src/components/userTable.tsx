@@ -21,6 +21,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // A TanStack fork of Kent C. Dodds' match-sorter library that provides ranking information
 import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
@@ -57,6 +59,8 @@ export default function UserTable() {
   );
 
   // console.log(users);
+
+  const router = useRouter();
 
   const columnHelper = createColumnHelper<IUser>();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -215,15 +219,22 @@ export default function UserTable() {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row, i) => {
+            // console.log("Row Details: ", row.original._id);
             return (
-              <tr key={row.id} className="border-b">
+              <tr
+                onClick={() => router.push(`/user/${row.original._id}`)}
+                key={row.id}
+                className="border-b cursor-pointer hover:bg-gray-100"
+              >
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td key={cell.id} className="px-3.5 py-2">
+                      {/* <Link href={`/user/${row.original._id}`}> */}
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
+                      {/* </Link> */}
                     </td>
                   );
                 })}
