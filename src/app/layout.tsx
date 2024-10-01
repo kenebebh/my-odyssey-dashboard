@@ -27,7 +27,7 @@ export default function RootLayout({
               <Sidebar />
             </div>
 
-            <div className="max-w-full p-2 flex flex-col gap-y-6">
+            <div className="max-w-full p-2 flex flex-col gap-y-3">
               <div>
                 <Header />
               </div>
