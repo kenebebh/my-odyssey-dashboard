@@ -7,6 +7,7 @@ import UserTable from "./user/userTable";
 import UserTypePieChart from "./user/user-type-pie-chart";
 import UserEngagementPieChart from "./user/user-engagement-pie-chart";
 import UserDetailsPage from "./user/user-details-page";
+import Header from "./header";
 
 export {
   Sidebar,
@@ -18,4 +19,5 @@ export {
   UserTypePieChart,
   UserEngagementPieChart,
   UserDetailsPage,
+  Header,
 };

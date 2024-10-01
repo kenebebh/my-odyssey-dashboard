@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
-import { Sidebar } from "@/components";
+import { Header, Sidebar } from "@/components";
 import { TanstackProvider } from "@/providers";
 
 import "./globals.css";
@@ -27,7 +27,12 @@ export default function RootLayout({
               <Sidebar />
             </div>
 
-            <div className="max-w-full p-2">{children}</div>
+            <div className="max-w-full p-2 flex flex-col gap-y-8">
+              <div>
+                <Header />
+              </div>
+              <div>{children}</div>
+            </div>
           </section>
         </TanstackProvider>
       </body>
