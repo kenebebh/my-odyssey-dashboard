@@ -99,7 +99,7 @@ export default function UserTable() {
         ),
         header: "Date Joined",
       }),
-      columnHelper.accessor("savedTrips", {
+      columnHelper.accessor("savedTripsCount", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Saved Trips",
       }),
