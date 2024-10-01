@@ -9,10 +9,6 @@ import {
 } from "@radix-ui/react-icons";
 
 export const links = [
-  // {
-  //   title: "Dashboard",
-  //   icon: <DashboardIcon color="#0077B6" />,
-  // },
   {
     title: "User Management",
     icon: <PersonIcon color="#0077B6" />,
