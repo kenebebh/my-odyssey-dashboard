@@ -7,4 +7,6 @@ export interface IUser {
   location: string;
   dateJoined: string;
   savedTrips: number;
+  verified: string;
+  deactivated: boolean;
 }
