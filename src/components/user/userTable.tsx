@@ -58,7 +58,7 @@ export default function UserTable() {
     ""
   );
 
-  // console.log(users);
+  console.log(users);
 
   const router = useRouter();
 
@@ -73,12 +73,10 @@ export default function UserTable() {
         cell: (info) => info.row.index + 1, // Use row.index to generate the serial number dynamically
         filterFn: "equalsString", //note: normal non-fuzzy filter column - exact match required
       },
-      {
-        header: "User Name",
-        accessorKey: "username",
-        cell: (info) => info.getValue(),
+      columnHelper.accessor((row) => `${row.firstName} ${row.lastName}`, {
+        id: "Full Name",
         filterFn: "includesString", //note: normal non-fuzzy filter column
-      },
+      }),
       columnHelper.accessor("userImage", {
         cell: (info) => (
           <img
@@ -89,7 +87,7 @@ export default function UserTable() {
         ),
         header: "User Image",
       }),
-      columnHelper.accessor("location", {
+      columnHelper.accessor("country", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Location",
       }),

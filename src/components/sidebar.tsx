@@ -14,7 +14,20 @@ export default function Sidebar() {
     "mb-1.5 pl-1 bg-theme/80 text-[#f1f1ee] shadow-sm rounded-r";
 
   // Function to determine if the link is active
-  const isActive = (href: string) => pathname === href;
+  // const isActive = (href: string) => pathname === href;
+
+  // Function to determine if the link is active
+  const isActive = (href: string) => {
+    if (pathname === href) return true;
+
+    // Special case for User Management: Any URL starting with /user should be treated as active under "All Users"
+    if (pathname.startsWith("/user") && href === "/user-management/all-users")
+      return true;
+
+    return false; // Default case: not active
+  };
+
+  // console.log(pathname);
 
   return (
     <div className="fixed w-[18rem] border-r overflow-y-scroll h-screen  py-3 pb-4 px-3">

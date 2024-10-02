@@ -20,10 +20,10 @@ interface IRating {
 export interface IUser {
   createdAt: string;
   _id: string;
-  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
   userImage: string;
-  location: string;
   gender: string;
   dateOfBirth: string;
   dateJoined: string;

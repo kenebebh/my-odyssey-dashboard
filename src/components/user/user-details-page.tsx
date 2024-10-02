@@ -21,6 +21,8 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
     error,
   } = usersQuery<IUser>(UsersAdapter.getUserDetails, ["user", userID], userID);
 
+  // console.log(user);
+
   if (isError) {
     return <div>Error: {error.message}</div>;
   }
