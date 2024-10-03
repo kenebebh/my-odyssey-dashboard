@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import { Header, Sidebar } from "@/components";
 import { TanstackProvider } from "@/providers";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
+// { subsets: ['latin'], display: 'swap', adjustFontFallback: false}
 const sans = DM_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
@@ -31,7 +33,10 @@ export default function RootLayout({
               <div>
                 <Header />
               </div>
-              <div>{children}</div>
+              <div>
+                <Toaster richColors position="top-center" />
+                {children}
+              </div>
             </div>
           </section>
         </TanstackProvider>

@@ -12,7 +12,9 @@ import {
   MapPinIcon,
   TicketIcon,
   StarIcon,
+  Pencil,
 } from "lucide-react";
+import EditUserModal from "./edit-user-modal";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
   const {
@@ -31,33 +33,43 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
     return <div>Loading...</div>;
   }
 
-  const userName = user.username ?? "";
-  const [firstName, lastName] = userName.split(" ");
+  const fullName = `${user.firstName} ${user.lastName}`;
+  const initials = `${user.firstName.charAt(0)}${user.lastName.charAt(
+    0
+  )}`.toUpperCase();
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="container mx-auto p-6 pt-2 space-y-6">
+      <div className="flex justify-end">
+        {/* <div className="flex flex-row w-fit items-center gap-x-2 border p-2 rounded-md border-slate-600 hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0.5">
+          <p className="font-semibold">Edit User Details</p>
+          <Pencil />
+        </div> */}
+        <EditUserModal />
+      </div>
+
       <div className="flex flex-col md:flex-row gap-6">
         <Card className="w-full md:w-1/3">
-          <CardHeader>
+          <CardHeader className="flex flex-row justify-between">
             <CardTitle>Personal Information</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col items-center">
             <Avatar className="w-32 h-32 mb-4">
-              <AvatarImage src={user.userImage} alt={userName} />
+              <AvatarImage src={user.userImage} alt={initials} />
               <AvatarFallback>
-                {firstName[0]}
-                {lastName[0]}
+                {user.firstName}
+                {user.lastName}
               </AvatarFallback>
             </Avatar>
-            <h2 className="text-2xl font-bold mb-2">{userName}</h2>
+            <h2 className="text-2xl font-bold mb-2">{fullName}</h2>
             <div className="grid grid-cols-2 gap-4 w-full">
               <div>
                 <p className="font-medium">First Name</p>
-                <p>{firstName}</p>
+                <p>{user.firstName}</p>
               </div>
               <div>
                 <p className="font-medium">Last Name</p>
-                <p>{lastName}</p>
+                <p>{user.lastName}</p>
               </div>
               <div>
                 <p className="font-medium">Gender</p>
@@ -107,7 +119,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
               </div>
               <div>
                 <p className="font-medium">Country</p>
-                <p>{user.location || "Not specified"}</p>
+                <p>{user.country || "Not specified"}</p>
               </div>
             </div>
           </CardContent>
