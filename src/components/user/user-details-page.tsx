@@ -14,7 +14,8 @@ import {
   StarIcon,
   Pencil,
 } from "lucide-react";
-import EditUserModal from "./edit-user-modal";
+// import EditUserModal from "./edit-user-modal";
+import EditUserForm from "./edit-user-form";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
   const {
@@ -41,11 +42,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
   return (
     <div className="container mx-auto p-6 pt-2 space-y-6">
       <div className="flex justify-end">
-        {/* <div className="flex flex-row w-fit items-center gap-x-2 border p-2 rounded-md border-slate-600 hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0.5">
-          <p className="font-semibold">Edit User Details</p>
-          <Pencil />
-        </div> */}
-        <EditUserModal />
+        <EditUserForm />
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
