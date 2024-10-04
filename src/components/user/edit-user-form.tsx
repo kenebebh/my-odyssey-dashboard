@@ -229,7 +229,7 @@ import { Label } from "@/components/ui/label";
 import { FormDialog } from "../partials/general-modules";
 import { Pencil } from "lucide-react";
 
-export default function EditUserForm() {
+export default function EditUserForm({ userID }: { userID: string }) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Handle form submission
@@ -252,7 +252,7 @@ export default function EditUserForm() {
       description="Make changes to the user's profile here."
       onSubmit={handleSubmit}
     >
-      <form className="grid gap-4 py-4">
+      <div className="grid gap-4 py-4">
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name" className="text-right">
             Name
@@ -269,7 +269,7 @@ export default function EditUserForm() {
             className="col-span-3"
           />
         </div>
-      </form>
+      </div>
     </FormDialog>
   );
 }
