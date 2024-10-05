@@ -6,14 +6,7 @@ import { IUser } from "@/lib/types/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  CalendarIcon,
-  ClockIcon,
-  MapPinIcon,
-  TicketIcon,
-  StarIcon,
-  Pencil,
-} from "lucide-react";
+import { CalendarIcon, ClockIcon, TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
