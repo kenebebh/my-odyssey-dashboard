@@ -46,10 +46,17 @@ class ApiService<T, R> {
     const contentType =
       type === "FormData" ? "multipart/form-data" : "application/json";
 
+    const config = {
+      headers: {
+        "Content-Type": contentType,
+      },
+    };
+
     if (method === "POST") {
       response = await apiInstance.post(
         `${slug ? this.url + "/" + slug : this.url}`,
-        payload
+        payload,
+        config
         //   {
         //     headers: {
         //       Authorization: this.token ? `Bearer ${this.token}` : "",
@@ -60,7 +67,8 @@ class ApiService<T, R> {
     } else if (method === "PATCH") {
       response = await apiInstance.patch(
         this.url + "/" + slug,
-        payload
+        payload,
+        config
         //      {
         //   headers: {
         //     Authorization: `Bearer ${this.token}`,
@@ -71,7 +79,8 @@ class ApiService<T, R> {
     } else if (method === "PUT") {
       response = await apiInstance.put(
         this.url + "/" + slug,
-        payload
+        payload,
+        config
         //      {
         //   headers: {
         //     Authorization: `Bearer ${this.token}`,

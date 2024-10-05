@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import { Header, Sidebar } from "@/components";
 import { TanstackProvider } from "@/providers";
-import { Toaster } from "sonner";
 
 import "./globals.css";
 
@@ -33,10 +32,7 @@ export default function RootLayout({
               <div>
                 <Header />
               </div>
-              <div>
-                <Toaster richColors position="top-center" />
-                {children}
-              </div>
+              <div>{children}</div>
             </div>
           </section>
         </TanstackProvider>

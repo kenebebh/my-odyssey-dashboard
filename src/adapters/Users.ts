@@ -38,6 +38,10 @@ const UsersAdapter = {
     const data = await usersService.getById(`${id}`);
     return data;
   },
+  editUserDetails: async function (payload: any, params: string) {
+    const res = await usersService.mutate(`${params}`, payload, "JSON", "PUT");
+    return res;
+  },
 };
 
 export { usersMutation, usersQuery, UsersAdapter };
