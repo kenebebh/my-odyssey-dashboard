@@ -17,6 +17,7 @@ interface FormDialogProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  isPending: boolean;
 }
 
 export default function FormDialog({
@@ -27,6 +28,7 @@ export default function FormDialog({
   onSubmit,
   open,
   onOpenChange,
+  isPending,
 }: FormDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -39,7 +41,9 @@ export default function FormDialog({
         <form onSubmit={onSubmit}>
           {children}
           <div className="flex justify-end mt-4">
-            <Button type="submit">Save changes</Button>
+            <Button type="submit">
+              {isPending ? "Please wait..." : "Save changes"}
+            </Button>
           </div>
         </form>
       </DialogContent>

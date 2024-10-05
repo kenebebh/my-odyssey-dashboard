@@ -28,7 +28,7 @@ export interface IUser {
   dateOfBirth: string;
   dateJoined: string;
   savedTripsCount: number;
-  verified: string;
+  verified: "verified" | "unverified";
   deactivated: boolean;
   phone: number;
   address: string;

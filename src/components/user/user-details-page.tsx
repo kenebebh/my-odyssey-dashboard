@@ -16,7 +16,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
     error,
   } = usersQuery<IUser>(UsersAdapter.getUserDetails, ["user", userID], userID);
 
-  // console.log(user);
+  console.log(user);
 
   if (isError) {
     return <div>Error: {error.message}</div>;
@@ -71,7 +71,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
               <div>
                 <p className="font-medium">Verification Status</p>
                 <Badge variant={user.verified ? "secondary" : "destructive"}>
-                  {user.verified ? "Verified" : "Not Verified"}
+                  {user.verified === "verified" ? "Verified" : "Not Verified"}
                 </Badge>
               </div>
               <div>

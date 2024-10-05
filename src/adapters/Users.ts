@@ -14,6 +14,7 @@ function usersMutation<T>(
 ) {
   return useMutation({
     mutationFn: (variables: T) => mutationCallback(variables, params),
+    retry: 3,
   });
 }
 
@@ -26,6 +27,7 @@ function usersQuery<B>(
   return useQuery({
     queryKey: queryKey,
     queryFn: () => queryCallback(params),
+    retry: 3,
   });
 }
 

@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { BellIcon, MessageSquareIcon, SettingsIcon } from "lucide-react";
+import AdminImage from "/admin.png";
 
 export default function Header() {
   return (
@@ -26,7 +27,7 @@ export default function Header() {
         </Button>
         <div className="flex items-center space-x-2">
           <Avatar>
-            <AvatarImage src="/placeholder.svg" alt="Admin" />
+            <AvatarImage src="placeholder.svg" alt="Admin" />
             <AvatarFallback>BK</AvatarFallback>
           </Avatar>
           <div>
