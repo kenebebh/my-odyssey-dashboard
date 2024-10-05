@@ -6,6 +6,8 @@ import { IUser } from "@/lib/types/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
+import GoBackButton from "../go-back-button";
 import { CalendarIcon, ClockIcon, TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
 
@@ -16,7 +18,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
     error,
   } = usersQuery<IUser>(UsersAdapter.getUserDetails, ["user", userID], userID);
 
-  console.log(user);
+  // console.log(user);
 
   if (isError) {
     return <div>Error: {error.message}</div>;
@@ -31,9 +33,19 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
     0
   )}`.toUpperCase();
 
+  const router = useRouter();
+
+  const handleGoBack = () => {
+    router.back();
+  };
+
   return (
     <div className="container mx-auto p-6 pt-2 space-y-6">
-      <div className="flex justify-end">
+      <div className="flex justify-between">
+        <div>
+          <GoBackButton />
+        </div>
+
         <EditUserForm {...user} />
       </div>
 
