@@ -43,8 +43,7 @@ export default function EditUserForm({
   const formData = new FormData();
   const queryClient = useQueryClient();
 
-  //   console.log(`user data: ${firstName}`);
-
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [userDetails, setUserDetails] = useState<IUserEdit>({
     firstName: firstName || "",
     lastName: lastName || "",
@@ -104,12 +103,14 @@ export default function EditUserForm({
 
     try {
       const res = await mutateAsync(updatedFields);
+      console.log(`response is ${res}`);
       if (res && res.data) {
-        queryClient.setQueryData(["user", res.data.id], res.data);
+        queryClient.invalidateQueries({ queryKey: ["user", _id] });
         toast({
           title: "Success",
           description: "User details updated successfully",
         });
+        setIsDialogOpen(false); // Close the dialog
       } else {
         throw new Error("No data returned from server");
       }
@@ -142,6 +143,8 @@ export default function EditUserForm({
       title="Edit User Details"
       description="Make changes to the user's profile here."
       onSubmit={handleSubmit}
+      open={isDialogOpen}
+      onOpenChange={setIsDialogOpen}
     >
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-4 items-center gap-4">
@@ -170,11 +173,5 @@ export default function EditUserForm({
         </div>
       </div>
     </FormDialog>
-  );
-
-  return (
-    <div>
-      <p>hello world</p>
-    </div>
   );
 }

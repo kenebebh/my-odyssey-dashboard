@@ -15,6 +15,8 @@ interface FormDialogProps {
   description?: string;
   children: ReactNode;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export default function FormDialog({
@@ -23,9 +25,11 @@ export default function FormDialog({
   description,
   children,
   onSubmit,
+  open,
+  onOpenChange,
 }: FormDialogProps) {
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{triggerContent}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
