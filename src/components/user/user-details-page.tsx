@@ -42,7 +42,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
   return (
     <div className="container mx-auto p-6 pt-2 space-y-6">
       <div className="flex justify-between">
-        <div>
+        <div className="flex justify-center items-center">
           <GoBackButton />
         </div>
 

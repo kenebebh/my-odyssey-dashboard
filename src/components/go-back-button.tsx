@@ -12,11 +12,11 @@ export default function GoBackButton() {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <Button
         variant="ghost"
         onClick={handleGoBack}
-        className="mb-4 flex items-center text-lg"
+        className="flex items-center text-lg"
       >
         <ArrowLeft className="mr-2 h-6 w-6" />
         Back
