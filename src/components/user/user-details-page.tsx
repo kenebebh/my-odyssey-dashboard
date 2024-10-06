@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import GoBackButton from "../go-back-button";
 import { CalendarIcon, ClockIcon, TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
+import { DateFormatter } from "../date-formatter";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
   const {
@@ -50,7 +51,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
-        <Card className="w-full md:w-1/3">
+        <Card className="w-full md:w-1/3 border-stone-300">
           <CardHeader className="flex flex-row justify-between">
             <CardTitle>Personal Information</CardTitle>
           </CardHeader>
@@ -65,30 +66,42 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
             <h2 className="text-2xl font-bold mb-2">{fullName}</h2>
             <div className="grid grid-cols-2 gap-4 w-full">
               <div>
-                <p className="font-medium">First Name</p>
+                <p className="font-semibold text-lg">First Name</p>
                 <p>{user.firstName}</p>
               </div>
               <div>
-                <p className="font-medium">Last Name</p>
-                <p>{user.lastName}</p>
+                <p className="font-semibold text-lg">Last Name</p>
+                <p className="">{user.lastName}</p>
               </div>
               <div>
-                <p className="font-medium">Gender</p>
+                <p className="font-semibold text-lg">Gender</p>
                 <p>{user.gender || "Not specified"}</p>
               </div>
               <div>
-                <p className="font-medium">Date of Birth</p>
+                <p className="font-semibold text-lg">Date of Birth</p>
                 <p>{user.dateOfBirth || "Not specified"}</p>
               </div>
               <div>
-                <p className="font-medium">Verification Status</p>
-                <Badge variant={user.verified ? "secondary" : "destructive"}>
+                <p className="font-semibold text-lg">Verification Status</p>
+                <Badge
+                  variant={
+                    user.verified === "verified" ? "secondary" : "destructive"
+                  }
+                  className={`p-2 text-[15px] px-3 ${
+                    user.verified === "verified" ? "bg-theme/20" : ""
+                  }`}
+                >
                   {user.verified === "verified" ? "Verified" : "Not Verified"}
                 </Badge>
               </div>
               <div>
-                <p className="font-medium">Account Status</p>
-                <Badge variant={user.deactivated ? "destructive" : "secondary"}>
+                <p className="font-semibold  text-lg">Account Status</p>
+                <Badge
+                  variant={user.deactivated ? "destructive" : "secondary"}
+                  className={`p-2 text-[15px] px-3 ${
+                    user?.deactivated ? "" : "bg-slate-200"
+                  }`}
+                >
                   {user.deactivated ? "Deactivated" : "Active"}
                 </Badge>
               </div>
@@ -96,30 +109,30 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
           </CardContent>
         </Card>
 
-        <Card className="w-full md:w-2/3">
+        <Card className="w-full md:w-2/3 border-stone-300">
           <CardHeader>
             <CardTitle>Contact Information</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="font-medium">Email Address</p>
+                <p className="font-semibold text-lg">Email Address</p>
                 <p>{user.email}</p>
               </div>
               <div>
-                <p className="font-medium">Phone</p>
+                <p className="font-semibold text-lg">Phone</p>
                 <p>{user.phone || "Not specified"}</p>
               </div>
               <div>
-                <p className="font-medium">Address</p>
+                <p className="font-semibold text-lg">Address</p>
                 <p>{user.address || "Not specified"}</p>
               </div>
               <div>
-                <p className="font-medium">City</p>
+                <p className="font-semibold text-lg">City</p>
                 <p>{user.city || "Not specified"}</p>
               </div>
               <div>
-                <p className="font-medium">Country</p>
+                <p className="font-semibold text-lg">Country</p>
                 <p>{user.country || "Not specified"}</p>
               </div>
             </div>
@@ -134,23 +147,25 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
-              <p className="font-medium flex items-center">
-                <CalendarIcon className="mr-2" /> Account Creation Date
+              <p className="font-semibold text-lg">Account Creation Date</p>
+              <p>
+                {user.createdAt ? (
+                  <DateFormatter dateString={user.createdAt} />
+                ) : (
+                  "Not available"
+                )}
               </p>
-              <p>{user.createdAt || "Not available"}</p>
             </div>
             <div>
-              <p className="font-medium flex items-center">
-                <ClockIcon className="mr-2" /> Last Login Date
-              </p>
+              <p className="font-semibold text-lg">Last Login Date</p>
               <p>{user.lastLoginDate || "Not available"}</p>
             </div>
             <div>
-              <p className="font-medium">Total Saved Trips</p>
+              <p className="font-semibold text-lg">Total Saved Trips</p>
               <p>{user.savedTripsCount || 0}</p>
             </div>
             <div>
-              <p className="font-medium">Booked Trips</p>
+              <p className="font-semibold text-lg">Booked Trips</p>
               <ul className="list-disc list-inside">
                 {user.bookedTrips?.map((trip, index) => (
                   <li key={index}>
@@ -160,7 +175,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
               </ul>
             </div>
             <div>
-              <p className="font-medium">Travel History</p>
+              <p className="font-semibold text-lg">Travel History</p>
               <ul className="list-disc list-inside">
                 {user.travelHistory?.map((trip, index) => (
                   <li key={index}>
@@ -170,7 +185,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
               </ul>
             </div>
             <div>
-              <p className="font-medium">Saved Wishlists</p>
+              <p className="font-semibold text-lg">Saved Wishlists</p>
               <ul className="list-disc list-inside">
                 {user.savedWishlists?.map((item, index) => (
                   <li key={index}>{item.destination}</li>
@@ -188,11 +203,11 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
-              <p className="font-medium">Average Session Duration</p>
+              <p className="font-semibold text-lg">Average Session Duration</p>
               <p>{user.avgSessionDuration || "Not available"}</p>
             </div>
             <div>
-              <p className="font-medium">Activity Status</p>
+              <p className="font-semibold text-lg">Activity Status</p>
               <Badge
                 variant={
                   user.activityStatus === "Active"
@@ -201,25 +216,36 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
                     ? "destructive"
                     : "default"
                 }
+                className={`p-2 text-[15px] px-3 ${
+                  user?.activityStatus === "Active" ? "bg-theme/30" : ""
+                }`}
               >
                 {user.activityStatus || "Not available"}
               </Badge>
             </div>
             <div>
-              <p className="font-medium">Frequent Travel Interests</p>
+              <p className="font-semibold text-lg">Frequent Travel Interests</p>
               <div className="flex flex-wrap gap-2">
                 {user.travelInterests?.map((interest, index) => (
-                  <Badge key={index} variant="outline">
+                  <Badge
+                    key={index}
+                    variant="outline"
+                    className="p-2 text-[15px] px-3 "
+                  >
                     {interest}
                   </Badge>
                 )) || "Not available"}
               </div>
             </div>
             <div>
-              <p className="font-medium">Preferred Destinations</p>
+              <p className="font-semibold text-lg">Preferred Destinations</p>
               <div className="flex flex-wrap gap-2">
                 {user.preferredDestinations?.map((destination, index) => (
-                  <Badge key={index} variant="outline">
+                  <Badge
+                    key={index}
+                    variant="outline"
+                    className="p-2 text-[15px] px-3"
+                  >
                     {destination}
                   </Badge>
                 )) || "Not available"}
@@ -254,7 +280,8 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <StarIcon className="mr-2" /> App Ratings
+              <StarIcon className="mr-2" color="#f8db1b" fill="#f8db1b" /> App
+              Ratings
             </CardTitle>
           </CardHeader>
           <CardContent>

@@ -9,6 +9,7 @@ import UserEngagementPieChart from "./user/user-engagement-pie-chart";
 import UserDetailsPage from "./user/user-details-page";
 import Header from "./header";
 import GoBackButton from "./go-back-button";
+import { DateFormatter } from "./date-formatter";
 
 export {
   Sidebar,
@@ -21,4 +22,6 @@ export {
   UserEngagementPieChart,
   UserDetailsPage,
   Header,
+  GoBackButton,
+  DateFormatter,
 };
