@@ -41,7 +41,12 @@ const UsersAdapter = {
     return data;
   },
   editUserDetails: async function (payload: any, params: string) {
-    const res = await usersService.mutate(`${params}`, payload, "JSON", "PUT");
+    const res = await usersService.mutate(
+      `${params}`,
+      payload,
+      "JSON",
+      "PATCH"
+    );
     return res;
   },
 };

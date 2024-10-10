@@ -58,7 +58,7 @@ export default function UserTable() {
     ""
   );
 
-  console.log(users);
+  // console.log(users);
 
   const router = useRouter();
 
