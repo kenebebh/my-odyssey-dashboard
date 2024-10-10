@@ -1,5 +1,9 @@
 import React from "react";
-import { UserEngagementPieChart, UserTypePieChart } from "@/components";
+// import { UserEngagementPieChart, UserTypePieChart } from "@/components";
+import {
+  UserEngagementPieChart,
+  UserTypePieChart,
+} from "@/components/charts/specific";
 
 export default function UserCharts() {
   return (

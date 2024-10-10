@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChartMultiple } from "./charts";
+import { BarChartMultiple } from "../generic";
 
 const revenueIncomeData = [
   { month: "January", revenue: 305, expenses: 80 },

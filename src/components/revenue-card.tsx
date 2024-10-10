@@ -1,5 +1,5 @@
 import React from "react";
-import RevenueBarChart from "./revenue-bar-chart";
+import RevenueBarChart from "./charts/specific/revenue-bar-chart";
 
 export default function RevenueCard() {
   return (

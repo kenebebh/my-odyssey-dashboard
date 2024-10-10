@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChartLabel } from "./charts";
+import { BarChartLabel } from "../generic";
 
 const revenueData = [
   { month: "January", income: 1235 },

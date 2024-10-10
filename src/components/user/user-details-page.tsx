@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import GoBackButton from "../go-back-button";
 import { CalendarIcon, ClockIcon, TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
-import { DateFormatter } from "../date-formatter";
+import { DateFormatter } from "../helpers";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
   const {

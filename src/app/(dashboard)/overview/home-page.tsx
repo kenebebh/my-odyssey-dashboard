@@ -1,13 +1,10 @@
 import React from "react";
+import { OverviewCard, RevenueCard } from "@/components";
+import { PersonIcon } from "@radix-ui/react-icons";
 import {
-  OverviewCard,
-  RevenueCard,
   MostVisitedCountriesChart,
   RevenueVsExpensesChart,
-} from "@/components";
-import { PersonIcon } from "@radix-ui/react-icons";
-
-import { PieChartLabel } from "@/components/charts/pie-chart-label";
+} from "@/components/charts/specific";
 
 export default function HomePage() {
   return (
