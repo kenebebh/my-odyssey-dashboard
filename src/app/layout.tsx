@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
-import { Header, Sidebar } from "@/components";
+// import { Header, Sidebar } from "@/components";
+import { Header, Sidebar } from "@/components/layout";
 import { TanstackProvider } from "@/providers";
 import { Toaster } from "@/components/ui/toaster";
 

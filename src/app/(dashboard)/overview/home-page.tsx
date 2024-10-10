@@ -1,5 +1,5 @@
 import React from "react";
-import { OverviewCard, RevenueCard } from "@/components";
+import { RevenueCard, OverviewCard } from "@/components/dashboard";
 import { PersonIcon } from "@radix-ui/react-icons";
 import {
   MostVisitedCountriesChart,

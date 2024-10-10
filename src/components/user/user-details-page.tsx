@@ -7,10 +7,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
-import GoBackButton from "../go-back-button";
 import { CalendarIcon, ClockIcon, TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
-import { DateFormatter } from "../helpers";
+import { DateFormatter, GoBackButton } from "../helpers";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
   const {
