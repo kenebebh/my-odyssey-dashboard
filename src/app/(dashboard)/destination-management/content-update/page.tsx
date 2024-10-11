@@ -142,37 +142,39 @@ export default function Contentupdate() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {topExperiences.map((experience) => (
-            <div
-              key={experience.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-            >
-              <div className="relative h-48 w-full">
-                <Image
-                  src={experience.image}
-                  alt={experience.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="w-auto h-auto"
-                />
+            <Link href={`/all-top-experiences/${experience.id}`}>
+              <div
+                key={experience.id}
+                className="bg-white rounded-lg shadow-md overflow-hidden"
+              >
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={experience.image}
+                    alt={experience.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="w-auto h-auto"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-xl mb-2">
+                    {experience.name}
+                  </h3>
+                  <p className="flex items-center text-sm text-gray-600 mb-2">
+                    <MapPinIcon className="mr-2 h-4 w-4" />
+                    {experience.country}
+                  </p>
+                  <p className="text-sm text-gray-700 mb-4">
+                    {experience.description}
+                  </p>
+                  <Link href={`/top-experiences/${experience.id}`}>
+                    <Button variant="outline" className="w-full">
+                      Edit Experience
+                    </Button>
+                  </Link>
+                </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-xl mb-2">
-                  {experience.name}
-                </h3>
-                <p className="flex items-center text-sm text-gray-600 mb-2">
-                  <MapPinIcon className="mr-2 h-4 w-4" />
-                  {experience.country}
-                </p>
-                <p className="text-sm text-gray-700 mb-4">
-                  {experience.description}
-                </p>
-                <Link href={`/top-experiences/${experience.id}`}>
-                  <Button variant="outline" className="w-full">
-                    Edit Experience
-                  </Button>
-                </Link>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
