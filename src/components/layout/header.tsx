@@ -27,7 +27,7 @@ export default function Header() {
         </Button>
         <div className="flex items-center space-x-2">
           <Avatar>
-            <AvatarImage src="placeholder.svg" alt="Admin" />
+            <AvatarImage src="/admin.png" alt="Admin" />
             <AvatarFallback>BK</AvatarFallback>
           </Avatar>
           <div>

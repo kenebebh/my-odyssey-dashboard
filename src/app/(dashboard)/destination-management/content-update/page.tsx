@@ -1,13 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -97,7 +90,7 @@ export default function Contentupdate() {
       <section className="space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-semibold">Events</h2>
-          <Link href="/all-local-events">
+          <Link href="/all-events">
             <Button>View All Events</Button>
           </Link>
         </div>
@@ -113,10 +106,11 @@ export default function Contentupdate() {
                   alt={event.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="w-auto h-auto"
                 />
               </div>
               <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2">{event.name}</h3>
+                <h3 className="font-semibold text-xl mb-2">{event.name}</h3>
                 <p className="flex items-center text-sm text-gray-600 mb-1">
                   <MapPinIcon className="mr-2 h-4 w-4" />
                   {event.country}
@@ -158,10 +152,11 @@ export default function Contentupdate() {
                   alt={experience.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="w-auto h-auto"
                 />
               </div>
               <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2">
+                <h3 className="font-semibold text-xl mb-2">
                   {experience.name}
                 </h3>
                 <p className="flex items-center text-sm text-gray-600 mb-2">
