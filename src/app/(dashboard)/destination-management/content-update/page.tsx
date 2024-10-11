@@ -96,42 +96,45 @@ export default function Contentupdate() {
 
       <section className="space-y-4">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-semibold">Local Events</h2>
+          <h2 className="text-2xl font-semibold">Events</h2>
           <Link href="/all-local-events">
             <Button>View All Events</Button>
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {events.map((event) => (
-            <Card key={event.id} className="overflow-hidden">
+            <div
+              key={event.id}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
               <div className="relative h-48 w-full">
-                <img
+                <Image
                   src={event.image}
                   alt={event.name}
-                  // layout="fill"
-                  // objectFit="cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
-              <CardHeader>
-                <CardTitle>{event.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">
+              <div className="p-4">
+                <h3 className="font-semibold text-lg mb-2">{event.name}</h3>
+                <p className="flex items-center text-sm text-gray-600 mb-1">
                   <MapPinIcon className="mr-2 h-4 w-4" />
                   {event.country}
                 </p>
-                <p className="flex items-center">
+                <p className="flex items-center text-sm text-gray-600 mb-2">
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {event.date}
                 </p>
-                <p className="mt-2">{event.description}</p>
-              </CardContent>
-              <CardFooter>
+                <p className="text-sm text-gray-700 mb-4">
+                  {event.description}
+                </p>
                 <Link href={`/local-events/${event.id}`}>
-                  <Button variant="outline">Edit Event</Button>
+                  <Button variant="outline" className="w-full">
+                    Edit Event
+                  </Button>
                 </Link>
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -145,31 +148,36 @@ export default function Contentupdate() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {topExperiences.map((experience) => (
-            <Card key={experience.id} className="overflow-hidden">
+            <div
+              key={experience.id}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
               <div className="relative h-48 w-full">
-                <img
+                <Image
                   src={experience.image}
                   alt={experience.name}
-                  // layout="fill"
-                  // objectFit="cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
-              <CardHeader>
-                <CardTitle>{experience.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">
+              <div className="p-4">
+                <h3 className="font-semibold text-lg mb-2">
+                  {experience.name}
+                </h3>
+                <p className="flex items-center text-sm text-gray-600 mb-2">
                   <MapPinIcon className="mr-2 h-4 w-4" />
                   {experience.country}
                 </p>
-                <p className="mt-2">{experience.description}</p>
-              </CardContent>
-              <CardFooter>
+                <p className="text-sm text-gray-700 mb-4">
+                  {experience.description}
+                </p>
                 <Link href={`/top-experiences/${experience.id}`}>
-                  <Button variant="outline">Edit Experience</Button>
+                  <Button variant="outline" className="w-full">
+                    Edit Experience
+                  </Button>
                 </Link>
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </section>
