@@ -18,7 +18,8 @@ import Image from "next/image";
 // Mock data for demonstration
 const eventData = {
   name: "Summer Music Festival 2023",
-  date: "2023-08-15",
+  startDate: "2023-08-15",
+  endDate: "2023-08-15",
   country: "United States",
   description:
     "A three-day music extravaganza featuring top artists from around the world.",
@@ -65,27 +66,41 @@ export default function EventDetails() {
             <CardTitle>Event Overview</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div>
-              <h3 className="font-semibold">Event Name</h3>
-              <p className="text-xl">{eventData.name}</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold">Date</h3>
-                  <p className="flex items-center">
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {eventData.date}
-                  </p>
+                  <h3 className="font-bold">Event Name</h3>
+                  <p className="text-xl">{eventData.name}</p>
+                </div>
+                <div className="grid grid-cols-2">
+                  <div>
+                    <h3 className="font-bold">Start Date</h3>
+                    <p className="flex items-center">
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {eventData.startDate}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="font-bold">End Date</h3>
+                    <p className="flex items-center">
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {eventData.endDate}
+                    </p>
+                  </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold">Country</h3>
+                  <h3 className="font-bold">Country</h3>
                   <p>{eventData.country}</p>
                 </div>
+                <div>
+                  <h3 className="font-bold">Description</h3>
+                  <p>{eventData.description}</p>
+                </div>
               </div>
-              <div className="md:col-span-2">
-                <h3 className="font-semibold mb-2">Event Image</h3>
-                <div className="relative h-64 w-full rounded-md overflow-hidden">
+
+              <div className="">
+                <h3 className="font-bold mb-2">Event Image</h3>
+                <div className="relative h-72 w-full rounded-md overflow-hidden">
                   <Image
                     src={eventData.image}
                     alt="Event image"
@@ -95,10 +110,6 @@ export default function EventDetails() {
                   />
                 </div>
               </div>
-            </div>
-            <div>
-              <h3 className="font-semibold">Description</h3>
-              <p>{eventData.description}</p>
             </div>
           </CardContent>
         </Card>
@@ -110,14 +121,14 @@ export default function EventDetails() {
           <CardContent className="space-y-4">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold">Location</h3>
+                <h3 className="font-bold">Location</h3>
                 <p className="flex items-center">
                   <MapPinIcon className="mr-2 h-4 w-4" />
                   {eventData.location}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold">Event Status</h3>
+                <h3 className="font-bold">Event Status</h3>
                 <Badge
                   variant={
                     eventData.status === "Active" ? "default" : "secondary"
@@ -129,14 +140,14 @@ export default function EventDetails() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <h3 className="font-semibold">Start Time</h3>
+                <h3 className="font-bold">Start Time</h3>
                 <p className="flex items-center">
                   <Clock className="mr-2 h-4 w-4" />
                   {eventData.startTime}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold">End Time</h3>
+                <h3 className="font-bold">End Time</h3>
                 <p className="flex items-center">
                   <Clock className="mr-2 h-4 w-4" />
                   {eventData.endTime}
@@ -152,14 +163,14 @@ export default function EventDetails() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <h3 className="font-semibold">Ticket Price</h3>
+              <h3 className="font-bold">Ticket Price</h3>
               <p className="flex items-center">
                 <Ticket className="mr-2 h-4 w-4" />
                 {eventData.ticketPrice}
               </p>
             </div>
             <div>
-              <h3 className="font-semibold">Ticket Availability</h3>
+              <h3 className="font-bold">Ticket Availability</h3>
               <Badge
                 variant={
                   eventData.ticketAvailability === "Available"
@@ -178,8 +189,8 @@ export default function EventDetails() {
             <CardTitle>Event Content</CardTitle>
           </CardHeader>
           <CardContent>
-            <h3 className="font-semibold mb-2">Media Gallery</h3>
-            <div className="grid grid-cols-3 gap-4">
+            <h3 className="font-bold mb-2">Media Gallery</h3>
+            <div className="grid md:grid-cols-3 gap-4">
               {eventData.gallery.map((image, index) => (
                 <div
                   key={index}
@@ -204,7 +215,7 @@ export default function EventDetails() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <h3 className="font-semibold">Associated Ads</h3>
+              <h3 className="font-bold">Associated Ads</h3>
               <div className="flex flex-wrap gap-2 mt-2">
                 {eventData.ads.map((ad, index) => (
                   <Badge key={index}>{ad}</Badge>
@@ -212,7 +223,7 @@ export default function EventDetails() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold">Ad Status</h3>
+              <h3 className="font-bold">Ad Status</h3>
               <Badge
                 variant={
                   eventData.adStatus === "Running" ? "default" : "secondary"
