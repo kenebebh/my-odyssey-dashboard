@@ -51,7 +51,7 @@ export default function EventDetails() {
     <div className="container mx-auto p-6 space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Event Details</h1>
-        <div className="space-x-2">
+        <div className="space-x-2 flex items-center">
           <Button variant="outline">
             <PenSquare className="mr-2 h-4 w-4" />
             Edit Event
