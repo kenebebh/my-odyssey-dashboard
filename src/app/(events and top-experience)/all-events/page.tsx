@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { GoBackButton } from "@/components/helpers";
 
 // Mock data for demonstration
 const events = [
@@ -102,17 +103,14 @@ const events = [
 export default function AllEvents() {
   return (
     <div className="container mx-auto p-6">
-      {/* <h1 className="text-3xl font-bold text-center mb-8">
-        Update Events and Top Experiences for Destinations
-      </h1> */}
+      <div className="items-center justify-between flex">
+        <GoBackButton />
+        <div className="w-full">
+          <h1 className="text-2xl font-bold text-center mr-24">All Events</h1>
+        </div>
+      </div>
 
-      <section className="space-y-4">
-        {/* <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-semibold">Events</h2>
-          <Link href="/all-events">
-            <Button>View All Events</Button>
-          </Link>
-        </div> */}
+      <section className="space-y-4 pt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6">
           {events.map((event) => (
             <Link href={`/all-events/${event.id}`} key={event.id}>
