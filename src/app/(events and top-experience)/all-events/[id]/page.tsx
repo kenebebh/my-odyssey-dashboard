@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -14,9 +15,11 @@ import {
   PenSquare,
 } from "lucide-react";
 import Image from "next/image";
+import { IEventData } from "@/lib/types/event";
+import { EditEventForm } from "@/components/events-experiences";
 
 // Mock data for demonstration
-const eventData = {
+const eventData: IEventData = {
   name: "Summer Music Festival 2023",
   startDate: "2023-08-15",
   endDate: "2023-08-15",
@@ -52,10 +55,7 @@ export default function EventDetails() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Event Details</h1>
         <div className="space-x-2 flex items-center">
-          <Button variant="outline">
-            <PenSquare className="mr-2 h-4 w-4" />
-            Edit Event
-          </Button>
+          <EditEventForm />
           <Button variant="destructive">Delete Event</Button>
         </div>
       </div>
