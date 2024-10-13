@@ -39,7 +39,8 @@ import Image from "next/image";
 // Mock data for demonstration
 const eventData = {
   name: "Summer Music Festival 2023",
-  date: new Date("2023-08-15"),
+  startDate: new Date("2023-08-15"),
+  endDate: new Date("2023-08-15"),
   country: "United States",
   description:
     "A three-day music extravaganza featuring top artists from around the world.",
@@ -63,7 +64,10 @@ const eventData = {
 //   onClose: () => void;
 // }) {
 export default function EditEventForm() {
-  const [date, setDate] = useState<Date | undefined>(eventData.date);
+  const [startDate, setStartDate] = useState<Date | undefined>(
+    eventData.startDate
+  );
+  const [endDate, setEndDate] = useState<Date | undefined>(eventData.endDate);
   const [gallery, setGallery] = useState(eventData.gallery);
   const [ads, setAds] = useState(eventData.ads);
   const [adStatus, setAdStatus] = useState(eventData.adStatus);
@@ -118,22 +122,29 @@ export default function EditEventForm() {
                       variant={"outline"}
                       className={cn(
                         "w-full justify-start text-left font-normal",
-                        !date && "text-muted-foreground"
+                        !startDate && "text-muted-foreground"
                       )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {date ? format(date, "PPP") : <span>Pick a date</span>}
+                      {startDate ? (
+                        format(startDate, "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="w-auto p-0">
                     <Calendar
                       mode="single"
-                      selected={date}
+                      selected={startDate}
                       onSelect={(newDate) => {
-                        setDate(newDate);
+                        setStartDate(newDate);
                         onClose();
                       }}
                       initialFocus
+                      captionLayout="dropdown-buttons"
+                      fromYear={2024}
+                      toYear={2024}
                     />
                   </DialogContent>
                 </Dialog>
