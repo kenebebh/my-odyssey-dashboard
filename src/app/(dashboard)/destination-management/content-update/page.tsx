@@ -5,6 +5,21 @@ import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
+// Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
+const keyStr =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+const triplet = (e1: number, e2: number, e3: number) =>
+  keyStr.charAt(e1 >> 2) +
+  keyStr.charAt(((e1 & 3) << 4) | (e2 >> 4)) +
+  keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
+  keyStr.charAt(e3 & 63);
+
+const rgbDataURL = (r: number, g: number, b: number) =>
+  `data:image/gif;base64,R0lGODlhAQABAPAA${
+    triplet(0, r, g) + triplet(b, 255, 255)
+  }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
+
 // Mock data for demonstration
 const events = [
   {
@@ -94,41 +109,43 @@ export default function Contentupdate() {
             <Button>View All Events</Button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {events.map((event) => (
-            <div
-              key={event.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-            >
-              <div className="relative h-48 w-full">
-                <Image
-                  src={event.image}
-                  alt={event.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="w-auto h-auto"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-xl mb-2">{event.name}</h3>
-                <p className="flex items-center text-sm text-gray-600 mb-1">
-                  <MapPinIcon className="mr-2 h-4 w-4" />
-                  {event.country}
-                </p>
-                <p className="flex items-center text-sm text-gray-600 mb-2">
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {event.date}
-                </p>
-                <p className="text-sm text-gray-700 mb-4">
-                  {event.description}
-                </p>
-                <Link href={`/local-events/${event.id}`}>
+            <Link href={`/all-events/${event.id}`} key={event.id}>
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={event.image}
+                    alt={event.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="w-auto h-auto"
+                    placeholder="blur"
+                    quality={60}
+                    blurDataURL={rgbDataURL(10, 10, 10)}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-xl mb-2">{event.name}</h3>
+                  <p className="flex items-center text-sm text-gray-600 mb-1">
+                    <MapPinIcon className="mr-2 h-4 w-4" />
+                    {event.country}
+                  </p>
+                  <p className="flex items-center text-sm text-gray-600 mb-2">
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {event.date}
+                  </p>
+                  <p className="text-sm text-gray-700 mb-4">
+                    {event.description}
+                  </p>
+                  {/* <Link href={`/local-events/${event.id}`}> */}
                   <Button variant="outline" className="w-full">
-                    Edit Event
+                    View Event
                   </Button>
-                </Link>
+                  {/* </Link> */}
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -140,13 +157,13 @@ export default function Contentupdate() {
             <Button>View All Experiences</Button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {topExperiences.map((experience) => (
-            <Link href={`/all-top-experiences/${experience.id}`}>
-              <div
-                key={experience.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-              >
+            <Link
+              href={`/all-top-experiences/${experience.id}`}
+              key={experience.id}
+            >
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="relative h-48 w-full">
                   <Image
                     src={experience.image}
@@ -154,6 +171,9 @@ export default function Contentupdate() {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="w-auto h-auto"
+                    placeholder="blur"
+                    quality={60}
+                    blurDataURL={rgbDataURL(50, 50, 10)}
                   />
                 </div>
                 <div className="p-4">
@@ -167,11 +187,11 @@ export default function Contentupdate() {
                   <p className="text-sm text-gray-700 mb-4">
                     {experience.description}
                   </p>
-                  <Link href={`/top-experiences/${experience.id}`}>
-                    <Button variant="outline" className="w-full">
-                      Edit Experience
-                    </Button>
-                  </Link>
+                  {/* <Link href={`/top-experiences/${experience.id}`}> */}
+                  <Button variant="outline" className="w-full">
+                    View Experience
+                  </Button>
+                  {/* </Link> */}
                 </div>
               </div>
             </Link>

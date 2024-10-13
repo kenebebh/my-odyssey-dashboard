@@ -115,11 +115,8 @@ export default function AllEvents() {
         </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6">
           {events.map((event) => (
-            <Link href={`/events/${event.id}`}>
-              <div
-                key={event.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-              >
+            <Link href={`/all-events/${event.id}`} key={event.id}>
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="relative h-48 w-full">
                   <Image
                     src={event.image}
@@ -142,11 +139,9 @@ export default function AllEvents() {
                   <p className="text-sm text-gray-700 mb-4">
                     {event.description}
                   </p>
-                  <Link href={`/local-events/${event.id}`}>
-                    <Button variant="outline" className="w-full">
-                      Edit Event
-                    </Button>
-                  </Link>
+                  <Button variant="outline" className="w-full">
+                    View Event
+                  </Button>
                 </div>
               </div>
             </Link>
