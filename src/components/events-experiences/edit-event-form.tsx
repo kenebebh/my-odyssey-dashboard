@@ -143,8 +143,8 @@ export default function EditEventForm() {
                       }}
                       initialFocus
                       captionLayout="dropdown-buttons"
-                      fromYear={2024}
-                      toYear={2024}
+                      fromYear={2000}
+                      toYear={2030}
                     />
                   </DialogContent>
                 </Dialog>
