@@ -3,9 +3,9 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
-import { IUser } from "@/lib/types/user";
+import { IEventData } from "@/lib/types/event";
 
-const usersService = new ApiService<IUser[], IUser>("/users");
+const eventService = new ApiService<IEventData[], IEventData>("/events");
 
 // mutation utility
 function usersMutation<T>(
@@ -31,24 +31,13 @@ function usersQuery<B>(
   });
 }
 
-const UsersAdapter = {
-  getAllUsers: async function () {
-    const res = await usersService.getAll("/");
+const eventsAdapter = {
+  getAllEvents: async function () {
+    const res = await eventService.getAll("/");
     return res;
   },
-  getUserDetails: async function (id: string) {
-    const res = await usersService.getById(`${id}`);
-    return res;
-  },
-  editUserDetails: async function (payload: any, params: string) {
-    const res = await usersService.mutate(
-      `${params}`,
-      payload,
-      "JSON",
-      "PATCH"
-    );
+  getEventDetails: async function (id: string) {
+    const res = await eventService.getById(`${id}`);
     return res;
   },
 };
-
-export { usersMutation, usersQuery, UsersAdapter };
