@@ -40,4 +40,16 @@ const eventsAdapter = {
     const res = await eventService.getById(`${id}`);
     return res;
   },
+  editEventDetails: async function (payload: any, params: string) {
+    const res = await eventService.mutate(
+      `${params}`,
+      payload,
+      "JSON",
+      "PATCH"
+    );
+    return res;
+  },
+  deleteEvent: async function (id: string) {
+    const res = await eventService.mutate(id, {}, "JSON", "DELETE");
+  },
 };
