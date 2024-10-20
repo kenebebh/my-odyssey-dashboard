@@ -28,7 +28,7 @@ interface IUserEdit {
   address: string;
   city: string;
   country: string;
-  _id: string;
+  id: string;
 }
 
 export default function EditUserForm({
@@ -41,7 +41,7 @@ export default function EditUserForm({
   address,
   city,
   country,
-  _id,
+  id,
 }: IUserEdit) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -57,12 +57,12 @@ export default function EditUserForm({
     address: address || "",
     city: city || "",
     country: country || "",
-    _id: _id,
+    id: id,
   });
 
   const { mutateAsync, isPending } = usersMutation(
     UsersAdapter.editUserDetails,
-    _id
+    id
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +91,7 @@ export default function EditUserForm({
       address,
       city,
       country,
-      _id,
+      id,
     };
 
     // const updatedFields = Object.entries(userDetails).reduce<
@@ -140,7 +140,7 @@ export default function EditUserForm({
       const res = await mutateAsync(updatedFields);
       console.log(res);
       if (res && res.data) {
-        queryClient.invalidateQueries({ queryKey: ["user", _id] });
+        queryClient.invalidateQueries({ queryKey: ["user", id] });
         toast({
           title: "Success",
           description: "User details updated successfully",

@@ -225,7 +225,7 @@ export default function UserTable() {
             // console.log("Row Details: ", row.original._id);
             return (
               <tr
-                onClick={() => router.push(`/user/${row.original._id}`)}
+                onClick={() => router.push(`/user/${row.original.id}`)}
                 key={row.id}
                 className="border-b cursor-pointer hover:bg-gray-100"
               >
