@@ -52,13 +52,18 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 };
 
 export default function UserTable() {
-  const { data: users, isLoading } = usersQuery<IUser[]>(
-    UsersAdapter.getAllUsers,
-    ["allUsers"],
-    ""
-  );
+  const {
+    data: users,
+    isError,
+    error,
+    isLoading,
+  } = usersQuery<IUser[]>(UsersAdapter.getAllUsers, ["allUsers"], "");
 
   // console.log(users);
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const router = useRouter();
 

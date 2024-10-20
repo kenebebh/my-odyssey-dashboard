@@ -8,7 +8,7 @@ import { IEventData } from "@/lib/types/event";
 const eventService = new ApiService<IEventData[], IEventData>("/events");
 
 // mutation utility
-function usersMutation<T>(
+function eventsMutation<T>(
   mutationCallback: MutationCallBack<T>,
   params: string
 ) {
@@ -19,7 +19,7 @@ function usersMutation<T>(
 }
 
 // query utility
-function usersQuery<B>(
+function eventsQuery<B>(
   queryCallback: QueryCallBack<B>,
   queryKey: string[],
   params: string
@@ -31,7 +31,7 @@ function usersQuery<B>(
   });
 }
 
-const eventsAdapter = {
+const EventsAdapter = {
   getAllEvents: async function () {
     const res = await eventService.getAll("/");
     return res;
@@ -53,3 +53,5 @@ const eventsAdapter = {
     const res = await eventService.mutate(id, {}, "JSON", "DELETE");
   },
 };
+
+export { eventsMutation, eventsQuery, EventsAdapter };

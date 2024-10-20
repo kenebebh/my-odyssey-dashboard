@@ -6,8 +6,7 @@ import { IUser } from "@/lib/types/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
-import { CalendarIcon, ClockIcon, TicketIcon, StarIcon } from "lucide-react";
+import { TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
 import { DateFormatter, GoBackButton } from "../helpers";
 
@@ -32,12 +31,6 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
   const initials = `${user.firstName.charAt(0)}${user.lastName.charAt(
     0
   )}`.toUpperCase();
-
-  const router = useRouter();
-
-  const handleGoBack = () => {
-    router.back();
-  };
 
   return (
     <div className="container mx-auto p-6 pt-2 space-y-6">
