@@ -7,7 +7,7 @@ interface EventMetrics {
 
 export interface IEventData {
   createdAt: string;
-  _id: string;
+  id: string;
   name: string;
   startDate: string; // Could use Date type if handling Date objects
   endDate: string; // Could use Date type if handling Date objects
