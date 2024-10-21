@@ -19,7 +19,7 @@ import { IEventData } from "@/lib/types/event";
 import { EditEventForm } from "@/components/events-experiences";
 
 // Mock data for demonstration
-const eventData: IEventData = {
+const eventData = {
   name: "Summer Music Festival 2023",
   startDate: "2023-08-15",
   endDate: "2023-08-15",
