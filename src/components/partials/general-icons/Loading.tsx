@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Loading() {
+export default function LoadingSpinner() {
   return (
     <svg
       className="mx-auto animate-spin"

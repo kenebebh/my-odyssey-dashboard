@@ -84,9 +84,10 @@ export default function EditEventForm({
       </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Edit Event</DialogTitle>
+          <DialogTitle>Edit Event Hello</DialogTitle>
           <DialogDescription>
-            Make changes to your event here. Click save when you're done.
+            Make changes to the {eventData.name} event here. Click save when
+            you're done.
           </DialogDescription>
         </DialogHeader>
         <form className="space-y-8">

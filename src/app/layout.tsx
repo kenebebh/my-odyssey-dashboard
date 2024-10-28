@@ -4,8 +4,10 @@ import { Inter, DM_Sans } from "next/font/google";
 import { Header, Sidebar } from "@/components/layout";
 import { TanstackProvider } from "@/providers";
 import { Toaster } from "@/components/ui/toaster";
+import Loading from "./loading";
 
 import "./globals.css";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 // { subsets: ['latin'], display: 'swap', adjustFontFallback: false}
@@ -34,7 +36,9 @@ export default function RootLayout({
               <div>
                 <Header />
               </div>
-              <div>{children}</div>
+              <Suspense fallback={<Loading />}>
+                <div>{children}</div>
+              </Suspense>
               <Toaster />
             </div>
           </section>
