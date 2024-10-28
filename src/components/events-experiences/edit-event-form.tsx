@@ -115,7 +115,7 @@ export default function EditEventForm() {
                 <Input id="event-name" defaultValue={eventData.name} />
               </div>
               <div className="space-y-2">
-                <Label>Date</Label>
+                <Label>Start Date</Label>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -139,6 +139,41 @@ export default function EditEventForm() {
                       selected={startDate}
                       onSelect={(newDate) => {
                         setStartDate(newDate);
+                        onClose();
+                      }}
+                      initialFocus
+                      captionLayout="dropdown-buttons"
+                      fromYear={2000}
+                      toYear={2030}
+                    />
+                  </DialogContent>
+                </Dialog>
+              </div>
+              <div className="space-y-2">
+                <Label>End Date</Label>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !endDate && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {endDate ? (
+                        format(endDate, "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      selected={endDate}
+                      onSelect={(newDate) => {
+                        setEndDate(newDate);
                         onClose();
                       }}
                       initialFocus
