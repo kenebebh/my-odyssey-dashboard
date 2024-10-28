@@ -33,6 +33,7 @@ export default function EventDetails({ params }: { params: { id: string } }) {
     ["event", eventID],
     eventID
   );
+  console.log(EventDetails);
 
   if (isError) {
     return <div>Error: {error.message}</div>;
@@ -52,7 +53,7 @@ export default function EventDetails({ params }: { params: { id: string } }) {
         <GoBackButton />
         <h1 className="text-3xl font-bold">Event Details</h1>
         <div className="space-x-2 flex items-center">
-          <EditEventForm />
+          {EventDetails && <EditEventForm eventData={EventDetails} />}
           <Button variant="destructive">Delete Event</Button>
         </div>
       </div>
