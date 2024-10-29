@@ -45,7 +45,6 @@ export default function EditEventForm({
   );
   const [gallery, setGallery] = useState(eventData.gallery);
   const [ads, setAds] = useState(eventData.ads);
-  // const [adStatus, setAdStatus] = useState(eventData.adStatus);
   const [adStatus, setAdStatus] = useState<AdStatus>(
     eventData.adStatus as AdStatus
   );
@@ -84,7 +83,7 @@ export default function EditEventForm({
       </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Edit Event Hello</DialogTitle>
+          <DialogTitle>Edit Event</DialogTitle>
           <DialogDescription>
             Make changes to the {eventData.name} event here. Click save when
             you're done.
