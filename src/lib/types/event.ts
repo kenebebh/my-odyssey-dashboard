@@ -25,3 +25,7 @@ export interface IEventData {
   adStatus: "Running" | "Paused" | "Ended";
   metrics: EventMetrics; // Metrics data with specific types for each
 }
+
+export interface IEventLimit {
+  data: IEventData[];
+}

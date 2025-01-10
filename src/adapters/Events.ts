@@ -3,9 +3,11 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
-import { IEventData } from "@/lib/types/event";
+import { IEventData, IEventLimit } from "@/lib/types/event";
 
 const eventService = new ApiService<IEventData[], IEventData>("/events");
+
+const eventQueryService = new ApiService<IEventLimit, IEventData>("/events");
 
 // mutation utility
 function eventsMutation<T>(
@@ -22,7 +24,7 @@ function eventsMutation<T>(
 function eventsQuery<B>(
   queryCallback: QueryCallBack<B>,
   queryKey: string[],
-  params: string
+  params: string | number
 ) {
   return useQuery({
     queryKey: queryKey,
@@ -34,6 +36,10 @@ function eventsQuery<B>(
 const EventsAdapter = {
   getAllEvents: async function () {
     const res = await eventService.getAll("/");
+    return res;
+  },
+  getEventsByLimit: async function (limit: number | string) {
+    const res = await eventQueryService.getAll(`?limit=${limit}`);
     return res;
   },
   getEventDetails: async function (id: string) {
