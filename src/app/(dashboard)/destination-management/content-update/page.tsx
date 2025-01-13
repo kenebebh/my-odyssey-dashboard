@@ -72,9 +72,9 @@ export default function Contentupdate() {
     limit
   );
 
-  if (isError) {
-    return <div>Error: {error.message}</div>;
-  }
+  // if (isError) {
+  //   return <div>Error: {error.message}</div>;
+  // }
 
   console.log(events?.data);
 
@@ -91,26 +91,29 @@ export default function Contentupdate() {
             <Button>View All Events</Button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 h-auto">
           {isLoading ? (
             <div>
-              <Skeleton className="rounded-lg shadow-md">
-                <Skeleton className="h-48 w-full" />
-                <Skeleton className="h-24 w-full" />
-                <Skeleton className="p-4">
-                  <Skeleton className="mb-2" />
-                  <Skeleton className="mb-1" />
-                  <Skeleton className="mb-2" />
-                  <Skeleton className="mb-4" />
-                  <Skeleton className="w-full" />
-                </Skeleton>
-              </Skeleton>
+              <div className="rounded-lg shadow-md">
+                <div className="w-full">
+                  <Skeleton className="h-40 w-full" />
+                </div>
+                <div className="p-4">
+                  <Skeleton className="mb-2 w-full h-3" />
+                  <Skeleton className="mb-1 w-full h-3" />
+                  <Skeleton className="mb-2 w-full h-3" />
+
+                  <Skeleton className="mt-4 w-full h-12" />
+                </div>
+              </div>
             </div>
+          ) : isError ? (
+            <div>Error: {error.message}</div>
           ) : (
-            <div>
+            <>
               {events?.data.map((event) => (
                 <Link href={`/all-events/${event.id}`} key={event.id}>
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden flex-1">
                     <div className="relative h-48 w-full">
                       <Image
                         src={event.image}
@@ -123,21 +126,27 @@ export default function Contentupdate() {
                         blurDataURL={rgbDataURL(10, 10, 10)}
                       />
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-xl mb-2">
-                        {event.name}
-                      </h3>
-                      <p className="flex items-center text-sm text-gray-600 mb-1">
-                        <MapPinIcon className="mr-2 h-4 w-4" />
-                        {event.country}
-                      </p>
-                      <p className="flex items-center text-sm text-gray-600 mb-2">
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {event.startDate}
-                      </p>
-                      <p className="text-sm text-gray-700 mb-4">
-                        {event.description}
-                      </p>
+                    <div className="p-4 flex flex-col gap-y-1 justify-between h-full">
+                      <section>
+                        <h3 className="font-semibold text-xl mb-2">
+                          {event.name}
+                        </h3>
+                        <p className="flex items-center text-sm text-gray-600 mb-1">
+                          <MapPinIcon className="mr-2 h-4 w-4" />
+                          {event.country}
+                        </p>
+                        <p className="flex items-center text-sm text-gray-600 mb-2">
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {event.startDate}
+                        </p>
+                      </section>
+
+                      <section>
+                        <p className="text-sm text-gray-700 mb-4 line-clamp-2">
+                          {event.description}
+                        </p>
+                      </section>
+
                       <Button variant="outline" className="w-full">
                         View Event
                       </Button>
@@ -145,7 +154,7 @@ export default function Contentupdate() {
                   </div>
                 </Link>
               ))}
-            </div>
+            </>
           )}
         </div>
       </section>
