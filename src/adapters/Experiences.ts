@@ -44,6 +44,7 @@ const TopExperienceAdapter = {
   },
   getLimitedExperiences: async function (limit: number | string) {
     const res = await experienceQueryService.getAll(`?limit=${limit}`);
+    return res;
   },
   getExperienceDetails: async function (id: string) {
     const res = await experienceService.getById(`${id}`);

@@ -2,8 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { CalendarIcon, MapPinIcon } from "lucide-react";
-import { eventsQuery, EventsAdapter } from "@/adapters";
+import {
+  eventsQuery,
+  EventsAdapter,
+  experiencesQuery,
+  TopExperienceAdapter,
+} from "@/adapters";
 import { IEventData, IEventLimit } from "@/lib/types/event";
+import { ILimitedExperiences } from "@/lib/types/experiences";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import Link from "next/link";
@@ -61,6 +67,7 @@ const topExperiences = [
 
 export default function Contentupdate() {
   const limit: number = 4;
+
   const {
     data: events,
     isError,
@@ -71,12 +78,20 @@ export default function Contentupdate() {
     ["events", String(limit)],
     limit
   );
+  // console.log(events?.data);
 
-  // if (isError) {
-  //   return <div>Error: {error.message}</div>;
-  // }
+  const {
+    data: experiences,
+    isError: isErrorExperience,
+    error: errorExperience,
+    isLoading: loadingExperience,
+  } = experiencesQuery<ILimitedExperiences>(
+    TopExperienceAdapter.getLimitedExperiences,
+    ["top-experiences", String(limit)],
+    limit
+  );
 
-  console.log(events?.data);
+  console.log(experiences?.data);
 
   return (
     <div className="container mx-auto p-6 space-y-8">
