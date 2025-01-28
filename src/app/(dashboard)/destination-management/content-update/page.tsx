@@ -108,8 +108,8 @@ export default function Contentupdate() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 h-auto">
           {isLoading ? (
-            <div>
-              <div className="rounded-lg shadow-md">
+            Array.from({ length: 4 }).map((_, index) => (
+              <div key={index} className="rounded-lg shadow-md">
                 <div className="w-full">
                   <Skeleton className="h-40 w-full" />
                 </div>
@@ -117,11 +117,10 @@ export default function Contentupdate() {
                   <Skeleton className="mb-2 w-full h-3" />
                   <Skeleton className="mb-1 w-full h-3" />
                   <Skeleton className="mb-2 w-full h-3" />
-
                   <Skeleton className="mt-4 w-full h-12" />
                 </div>
               </div>
-            </div>
+            ))
           ) : isError ? (
             <div>Error: {error.message}</div>
           ) : (

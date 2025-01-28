@@ -7,10 +7,10 @@ import { IExperience, ILimitedExperiences } from "@/lib/types/experiences";
 import { IEventData } from "@/lib/types/event";
 
 const experienceService = new ApiService<IExperience[], IExperience>(
-  "/top-expriences"
+  "/top-experiences"
 );
 const experienceQueryService = new ApiService<ILimitedExperiences, IExperience>(
-  "/top-expriences"
+  "/top-experiences"
 );
 
 //mutation utility
