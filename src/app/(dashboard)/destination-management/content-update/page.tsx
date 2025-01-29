@@ -11,6 +11,7 @@ import {
 import { IEventData, IEventLimit } from "@/lib/types/event";
 import { ILimitedExperiences } from "@/lib/types/experiences";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EventCard, ExperienceCard } from "@/components/events-experiences";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -29,41 +30,6 @@ const rgbDataURL = (r: number, g: number, b: number) =>
   `data:image/gif;base64,R0lGODlhAQABAPAA${
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
-
-const topExperiences = [
-  {
-    id: 1,
-    name: "Eiffel Tower Visit",
-    country: "France",
-    description: "Visit the iconic Eiffel Tower",
-    image:
-      "https://images.unsplash.com/photo-1727459740748-a0004bd98ed6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEwMHxGem8zenVPSE42d3x8ZW58MHx8fHx8",
-  },
-  {
-    id: 2,
-    name: "Mount Fuji Hike",
-    country: "Japan",
-    description: "Hike Japan's highest mountain",
-    image:
-      "https://images.unsplash.com/photo-1727459740748-a0004bd98ed6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEwMHxGem8zenVPSE42d3x8ZW58MHx8fHx8",
-  },
-  {
-    id: 3,
-    name: "Neuschwanstein Castle Tour",
-    country: "Germany",
-    description: "Tour the fairy-tale castle",
-    image:
-      "https://images.unsplash.com/photo-1727459740748-a0004bd98ed6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEwMHxGem8zenVPSE42d3x8ZW58MHx8fHx8",
-  },
-  {
-    id: 4,
-    name: "Broadway Show",
-    country: "USA",
-    description: "Watch a show on Broadway",
-    image:
-      "https://images.unsplash.com/photo-1727459740748-a0004bd98ed6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEwMHxGem8zenVPSE42d3x8ZW58MHx8fHx8",
-  },
-];
 
 export default function Contentupdate() {
   const limit: number = 4;
@@ -127,45 +93,7 @@ export default function Contentupdate() {
             <>
               {events?.data.map((event) => (
                 <Link href={`/all-events/${event.id}`} key={event.id}>
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden flex-1">
-                    <div className="relative h-48 w-full">
-                      <Image
-                        src={event.image}
-                        alt={event.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="w-auto h-auto"
-                        placeholder="blur"
-                        quality={60}
-                        blurDataURL={rgbDataURL(10, 10, 10)}
-                      />
-                    </div>
-                    <div className="p-4 flex flex-col gap-y-1 justify-between h-full">
-                      <section>
-                        <h3 className="font-semibold text-xl mb-2">
-                          {event.name}
-                        </h3>
-                        <p className="flex items-center text-sm text-gray-600 mb-1">
-                          <MapPinIcon className="mr-2 h-4 w-4" />
-                          {event.country}
-                        </p>
-                        <p className="flex items-center text-sm text-gray-600 mb-2">
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {event.startDate}
-                        </p>
-                      </section>
-
-                      <section>
-                        <p className="text-sm text-gray-700 mb-4 line-clamp-2">
-                          {event.description}
-                        </p>
-                      </section>
-
-                      <Button variant="outline" className="w-full">
-                        View Event
-                      </Button>
-                    </div>
-                  </div>
+                  <EventCard key={event.id} event={event} />
                 </Link>
               ))}
             </>
@@ -181,44 +109,34 @@ export default function Contentupdate() {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {topExperiences.map((experience) => (
-            <Link
-              href={`/all-top-experiences/${experience.id}`}
-              key={experience.id}
-            >
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={experience.image}
-                    alt={experience.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="w-auto h-auto"
-                    placeholder="blur"
-                    quality={60}
-                    blurDataURL={rgbDataURL(50, 50, 10)}
-                  />
+          {loadingExperience ? (
+            Array.from({ length: 4 }).map((_, index) => (
+              <div key={index} className="rounded-lg shadow-md">
+                <div className="w-full">
+                  <Skeleton className="h-40 w-full" />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-xl mb-2">
-                    {experience.name}
-                  </h3>
-                  <p className="flex items-center text-sm text-gray-600 mb-2">
-                    <MapPinIcon className="mr-2 h-4 w-4" />
-                    {experience.country}
-                  </p>
-                  <p className="text-sm text-gray-700 mb-4">
-                    {experience.description}
-                  </p>
-                  {/* <Link href={`/top-experiences/${experience.id}`}> */}
-                  <Button variant="outline" className="w-full">
-                    View Experience
-                  </Button>
-                  {/* </Link> */}
+                  <Skeleton className="mb-2 w-full h-3" />
+                  <Skeleton className="mb-1 w-full h-3" />
+                  <Skeleton className="mb-2 w-full h-3" />
+                  <Skeleton className="mt-4 w-full h-12" />
                 </div>
               </div>
-            </Link>
-          ))}
+            ))
+          ) : isErrorExperience ? (
+            <div>Error: {errorExperience.message}</div>
+          ) : (
+            <>
+              {experiences?.data.map((experience) => (
+                <Link
+                  href={`/all-top-experiences/${experience.id}`}
+                  key={experience.id}
+                >
+                  <ExperienceCard key={experience.id} experience={experience} />
+                </Link>
+              ))}
+            </>
+          )}
         </div>
       </section>
     </div>

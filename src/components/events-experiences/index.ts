@@ -1,3 +1,5 @@
+import EventCard from "./eventsCard";
+import ExperienceCard from "./experienceCard";
 import EditEventForm from "./edit-event-form";
 
-export { EditEventForm };
+export { EventCard, ExperienceCard, EditEventForm };
