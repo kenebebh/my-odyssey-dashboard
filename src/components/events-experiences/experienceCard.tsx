@@ -65,11 +65,11 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
         </div>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <Button asChild className="w-full">
+        <button className="w-full">
           <Link href={`/all-top-experiences/${experience.id}`}>
             View Experience
           </Link>
-        </Button>
+        </button>
       </CardFooter>
     </Card>
   );

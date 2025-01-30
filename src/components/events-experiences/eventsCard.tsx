@@ -10,6 +10,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { IEventData } from "@/lib/types/event";
+import { DateFormatter } from "../helpers";
 
 interface EventCardProps {
   event: IEventData;
@@ -38,16 +39,20 @@ export default function EventCard({ event }: EventCardProps) {
         </div>
         <div className="flex items-center text-sm text-gray-600 mb-2">
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {event.startDate}
+          {event?.startDate ? (
+            <DateFormatter dateString={event?.startDate} />
+          ) : (
+            "Not available"
+          )}
         </div>
         <p className="text-sm text-gray-700 mb-4 line-clamp-2">
           {event.description}
         </p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <Button asChild className="w-full">
+        <button className="w-full">
           <Link href={`/all-events/${event.id}`}>View Event</Link>
-        </Button>
+        </button>
       </CardFooter>
     </Card>
   );

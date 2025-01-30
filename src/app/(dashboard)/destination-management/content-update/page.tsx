@@ -1,20 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, MapPinIcon } from "lucide-react";
 import {
   eventsQuery,
   EventsAdapter,
   experiencesQuery,
   TopExperienceAdapter,
 } from "@/adapters";
-import { IEventData, IEventLimit } from "@/lib/types/event";
+import { IEventLimit } from "@/lib/types/event";
 import { ILimitedExperiences } from "@/lib/types/experiences";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EventCard, ExperienceCard } from "@/components/events-experiences";
 
 import Link from "next/link";
-import Image from "next/image";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr =
@@ -56,8 +54,6 @@ export default function Contentupdate() {
     ["top-experiences", String(limit)],
     limit
   );
-
-  console.log(experiences?.data);
 
   return (
     <div className="container mx-auto p-6 space-y-8">

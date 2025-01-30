@@ -42,7 +42,7 @@ const EventsAdapter = {
     const res = await eventQueryService.getAll(`?limit=${limit}`);
     return res;
   },
-  getEventDetails: async function (id: string) {
+  getEventDetails: async function (id: string | number) {
     const res = await eventService.getById(`${id}`);
     return res;
   },

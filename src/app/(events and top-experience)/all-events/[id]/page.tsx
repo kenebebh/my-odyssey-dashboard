@@ -39,14 +39,6 @@ export default function EventDetails({ params }: { params: { id: string } }) {
     return <div>Error: {error.message}</div>;
   }
 
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  if (error) {
-    return <div>Something went wrong</div>;
-  }
-
   return (
     <div className="container mx-auto p-6 space-y-8">
       <div className="flex justify-between items-center">
