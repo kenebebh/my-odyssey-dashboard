@@ -36,7 +36,7 @@ const UsersAdapter = {
     const res = await usersService.getAll("/");
     return res;
   },
-  getUserDetails: async function (id: string) {
+  getUserDetails: async function (id: string | number) {
     const res = await usersService.getById(`${id}`);
     return res;
   },
