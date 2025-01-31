@@ -9,26 +9,38 @@ import { Badge } from "@/components/ui/badge";
 import { TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
 import { DateFormatter, GoBackButton } from "../helpers";
+import { UserDetailsSkeleton } from "./user-details-skeleton";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
   const {
     data: user,
     isError,
     error,
+    isLoading,
   } = usersQuery<IUser>(UsersAdapter.getUserDetails, ["user", userID], userID);
 
-  // console.log(user);
+  if (isLoading) {
+    return <UserDetailsSkeleton />;
+  }
 
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="container mx-auto p-6 text-red-500">
+        Error: {error.message}
+      </div>
+    );
   }
 
   if (!user) {
-    return <div>Loading...</div>;
+    return (
+      <div className="container mx-auto p-6">
+        User not found. Please check the user ID and try again.
+      </div>
+    );
   }
 
-  const fullName = `${user.firstName} ${user.lastName}`;
-  const initials = `${user.firstName.charAt(0)}${user.lastName.charAt(
+  const fullName = `${user?.firstName} ${user?.lastName}`;
+  const initials = `${user?.firstName.charAt(0)}${user?.lastName.charAt(
     0
   )}`.toUpperCase();
 
