@@ -1,5 +1,7 @@
 "use client";
 
+import { notFound } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { experiencesQuery, TopExperienceAdapter } from "@/adapters";
@@ -40,6 +42,10 @@ export default function TopExperienceDetails({
 
   if (isError) {
     return <div>Error: {error.message}</div>;
+  }
+
+  if (!ExperienceDetails) {
+    notFound();
   }
 
   return (

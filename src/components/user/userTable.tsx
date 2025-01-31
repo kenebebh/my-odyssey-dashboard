@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usersQuery, UsersAdapter } from "@/adapters";
 import { IUser } from "@/lib/types/user";
 import {
@@ -52,6 +52,8 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 };
 
 export default function UserTable() {
+  const router = useRouter();
+
   const {
     data: users,
     isError,
@@ -61,15 +63,18 @@ export default function UserTable() {
 
   // console.log(users);
 
-  if (isError) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  const router = useRouter();
-
   const columnHelper = createColumnHelper<IUser>();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isError) {
+      setErrorMessage(error?.message || "An error occurred");
+    } else {
+      setErrorMessage(null);
+    }
+  }, [isError, error]);
 
   const columns = React.useMemo<ColumnDef<IUser, any>[]>(
     () => [
@@ -174,78 +179,88 @@ export default function UserTable() {
         </div>
       </div>
       <div className="h-2 w-full" />
-      <table className="w-full text-left">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+
+      {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <table className="w-full text-left">
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <th
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        className="capitalize pl-2 py-3 bg-gray-200"
+                      >
+                        {header.isPlaceholder ? null : (
+                          <>
+                            <div
+                              {...{
+                                className: header.column.getCanSort()
+                                  ? "cursor-pointer select-none flex items-center gap-x-3 hover:underline"
+                                  : "",
+                                onClick:
+                                  header.column.getToggleSortingHandler(),
+                              }}
+                            >
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                              {{
+                                asc: (
+                                  <span className="">
+                                    <ArrowUpIcon fill="#2F4F4F" />
+                                  </span>
+                                ),
+                                desc: (
+                                  <span className="">
+                                    <ArrowDownIcon fill="#2F4F4F" />
+                                  </span>
+                                ),
+                              }[header.column.getIsSorted() as string] ?? null}
+                            </div>
+                          </>
+                        )}
+                      </th>
+                    );
+                  })}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row, i) => {
+                // console.log("Row Details: ", row.original._id);
                 return (
-                  <th
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    className="capitalize pl-2 py-3 bg-gray-200"
+                  <tr
+                    onClick={() => router.push(`/user/${row.original.id}`)}
+                    key={row.id}
+                    className="border-b cursor-pointer hover:bg-gray-100"
                   >
-                    {header.isPlaceholder ? null : (
-                      <>
-                        <div
-                          {...{
-                            className: header.column.getCanSort()
-                              ? "cursor-pointer select-none flex items-center gap-x-3 hover:underline"
-                              : "",
-                            onClick: header.column.getToggleSortingHandler(),
-                          }}
-                        >
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td key={cell.id} className="px-3.5 py-2">
+                          {/* <Link href={`/user/${row.original._id}`}> */}
                           {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
+                            cell.column.columnDef.cell,
+                            cell.getContext()
                           )}
-                          {{
-                            asc: (
-                              <span className="">
-                                <ArrowUpIcon fill="#2F4F4F" />
-                              </span>
-                            ),
-                            desc: (
-                              <span className="">
-                                <ArrowDownIcon fill="#2F4F4F" />
-                              </span>
-                            ),
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      </>
-                    )}
-                  </th>
+                          {/* </Link> */}
+                        </td>
+                      );
+                    })}
+                  </tr>
                 );
               })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row, i) => {
-            // console.log("Row Details: ", row.original._id);
-            return (
-              <tr
-                onClick={() => router.push(`/user/${row.original.id}`)}
-                key={row.id}
-                className="border-b cursor-pointer hover:bg-gray-100"
-              >
-                {row.getVisibleCells().map((cell) => {
-                  return (
-                    <td key={cell.id} className="px-3.5 py-2">
-                      {/* <Link href={`/user/${row.original._id}`}> */}
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                      {/* </Link> */}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </>
+      )}
 
       {/* pagination */}
       <div className="flex items-center justify-end mt-4 gap-2">
