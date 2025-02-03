@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
 import { IUser } from "@/lib/types/user";
+import { queryWithErrorHandling } from "@/hooks/queryWithErrorHandling";
 
 const usersService = new ApiService<IUser[], IUser>("/users");
 
@@ -19,16 +20,30 @@ function usersMutation<T>(
 }
 
 // query utility
-function usersQuery<B>(
-  queryCallback: QueryCallBack<B>,
+// function usersQuery<B>(
+//   queryCallback: QueryCallBack<B>,
+//   queryKey: string[],
+//   params: string
+// ) {
+//   return useQuery({
+//     queryKey: queryKey,
+//     queryFn: () => queryCallback(params),
+//     retry: 3,
+//   });
+// }
+
+// query utility with error handling
+function usersQuery<TData = IUser | IUser[]>(
+  queryCallback: QueryCallBack<TData>,
   queryKey: string[],
   params: string
 ) {
-  return useQuery({
-    queryKey: queryKey,
-    queryFn: () => queryCallback(params),
-    retry: 3,
-  });
+  return queryWithErrorHandling<TData, unknown, TData, string[]>(
+    queryCallback,
+    queryKey,
+    params,
+    { retry: 3 }
+  );
 }
 
 const UsersAdapter = {

@@ -17,16 +17,29 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
     isError,
     error,
     isLoading,
+    errorMessage,
   } = usersQuery<IUser>(UsersAdapter.getUserDetails, ["user", userID], userID);
+
+  console.log(errorMessage);
 
   if (isLoading) {
     return <UserDetailsSkeleton />;
   }
 
+  // if (isError) {
+  //   console.log(error);
+  //   return (
+  //     <div className="container mx-auto p-6 text-red-500">
+  //       Error: {error.message}
+  //     </div>
+  //   );
+  // }
+
   if (isError) {
+    console.log(error);
     return (
       <div className="container mx-auto p-6 text-red-500">
-        Error: {error.message}
+        Error: {errorMessage}
       </div>
     );
   }
