@@ -26,17 +26,7 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
     return <UserDetailsSkeleton />;
   }
 
-  // if (isError) {
-  //   console.log(error);
-  //   return (
-  //     <div className="container mx-auto p-6 text-red-500">
-  //       Error: {error.message}
-  //     </div>
-  //   );
-  // }
-
   if (isError) {
-    console.log(error);
     return (
       <div className="container mx-auto p-6 text-red-500">
         Error: {errorMessage}

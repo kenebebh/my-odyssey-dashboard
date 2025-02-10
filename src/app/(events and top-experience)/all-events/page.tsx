@@ -14,10 +14,13 @@ export default function AllEvents() {
     isError,
     error,
     isLoading,
+    errorMessage,
   } = eventsQuery<IEventData[]>(EventsAdapter.getAllEvents, ["allEvents"], "");
 
+  // console.log(errorMessage);
+
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: {errorMessage}</div>;
   }
 
   // console.log(events);

@@ -27,15 +27,16 @@ export default function EventDetails({ params }: { params: { id: string } }) {
     isError,
     error,
     isLoading,
+    errorMessage,
   } = eventsQuery<IEventData>(
     EventsAdapter.getEventDetails,
     ["event", eventID],
     eventID
   );
-  console.log(EventDetails);
+  console.log(errorMessage);
 
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: {errorMessage}</div>;
   }
 
   return (

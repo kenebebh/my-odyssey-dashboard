@@ -12,14 +12,14 @@ export function queryWithErrorHandling<
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey
 >(
-  queryCallback: (params: string) => Promise<TQueryFnData>,
+  queryCallback: (params: string | number) => Promise<TQueryFnData>,
   queryKey: TQueryKey,
-  params: string,
+  params: string | number,
   options?: Omit<
     UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     "queryKey" | "queryFn"
   >
-): UseQueryResult<TData, string> & { errorMessage: string | null } {
+): UseQueryResult<TData, string | number> & { errorMessage: string | null } {
   const queryFn = () => queryCallback(params);
   const queryOptions: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey> =
     {

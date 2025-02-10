@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
 import { IEventData, IEventLimit } from "@/lib/types/event";
+import { queryWithErrorHandling } from "@/hooks/queryWithErrorHandling";
 
 const eventService = new ApiService<IEventData[], IEventData>("/events");
 
@@ -21,16 +22,29 @@ function eventsMutation<T>(
 }
 
 // query utility
-function eventsQuery<B>(
-  queryCallback: QueryCallBack<B>,
+// function eventsQuery<B>(
+//   queryCallback: QueryCallBack<B>,
+//   queryKey: string[],
+//   params: string | number
+// ) {
+//   return useQuery({
+//     queryKey: queryKey,
+//     queryFn: () => queryCallback(params),
+//     retry: 3,
+//   });
+// }
+
+function eventsQuery<TData = IEventData[] | IEventData>(
+  queryCallback: QueryCallBack<TData>,
   queryKey: string[],
   params: string | number
 ) {
-  return useQuery({
-    queryKey: queryKey,
-    queryFn: () => queryCallback(params),
-    retry: 3,
-  });
+  return queryWithErrorHandling<TData, unknown, TData, string[]>(
+    queryCallback,
+    queryKey,
+    params,
+    { retry: 3 }
+  );
 }
 
 const EventsAdapter = {
