@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usersQuery, UsersAdapter } from "@/adapters";
-import { IUser } from "@/lib/types/user";
+import type { IUser, IUsers } from "@/lib/types/user";
 import {
   MagnifyingGlassIcon,
   ArrowUpIcon,
@@ -10,10 +10,10 @@ import {
 } from "@radix-ui/react-icons";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-  ColumnDef,
-  ColumnFiltersState,
+  type ColumnDef,
+  type ColumnFiltersState,
   createColumnHelper,
-  FilterFn,
+  type FilterFn,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -21,14 +21,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-// A TanStack fork of Kent C. Dodds' match-sorter library that provides ranking information
-import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
+import { type RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
 
 declare module "@tanstack/react-table" {
-  //add fuzzy filter to the filterFns
   interface FilterFns {
     fuzzy: FilterFn<unknown>;
   }
@@ -37,60 +33,43 @@ declare module "@tanstack/react-table" {
   }
 }
 
-// Define a custom fuzzy filter function that will apply ranking info to rows (using match-sorter utils)
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
-  // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value);
-
-  // Store the itemRank info
-  addMeta({
-    itemRank,
-  });
-
-  // Return if the item should be filtered in/out
+  addMeta({ itemRank });
   return itemRank.passed;
 };
 
 export default function UserTable() {
   const router = useRouter();
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = useState("");
 
   const {
     data: users,
     isError,
-    error,
     isLoading,
-  } = usersQuery<IUser[]>(UsersAdapter.getAllUsers, ["allUsers"], "");
+    errorMessage,
+  } = usersQuery<IUsers>(UsersAdapter.getAllUsers, ["allUsers"], "");
 
-  // console.log(users);
+  console.log(users);
 
   const columnHelper = createColumnHelper<IUser>();
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [globalFilter, setGlobalFilter] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (isError) {
-      setErrorMessage(error?.message || "An error occurred");
-    } else {
-      setErrorMessage(null);
-    }
-  }, [isError, error]);
 
   const columns = React.useMemo<ColumnDef<IUser, any>[]>(
     () => [
       {
         header: "Serial Number",
-        cell: (info) => info.row.index + 1, // Use row.index to generate the serial number dynamically
-        filterFn: "equalsString", //note: normal non-fuzzy filter column - exact match required
+        cell: (info) => info.row.index + 1,
+        filterFn: "equalsString",
       },
       columnHelper.accessor((row) => `${row.firstName} ${row.lastName}`, {
         id: "Full Name",
-        filterFn: "includesString", //note: normal non-fuzzy filter column
+        filterFn: "includesString",
       }),
       columnHelper.accessor("userImage", {
         cell: (info) => (
           <img
-            src={info?.getValue()}
+            src={info?.getValue() || "/placeholder.svg"}
             alt="User Profile picture"
             className="rounded-full w-10 h-10 object-cover"
           />
@@ -112,16 +91,14 @@ export default function UserTable() {
         header: "Saved Trips",
       }),
     ],
-    []
+    [columnHelper] // Added columnHelper to dependencies
   );
 
-  const [data] = React.useState<IUser[]>(users!);
-
   const table = useReactTable({
-    data: users || [],
+    data: users?.data || [],
     columns,
     filterFns: {
-      fuzzy: fuzzyFilter, //define as a filter function that can be used in column definitions
+      fuzzy: fuzzyFilter,
     },
     state: {
       columnFilters,
@@ -129,9 +106,9 @@ export default function UserTable() {
     },
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: "fuzzy", //apply fuzzy filter to the global filter (most common use case for fuzzy filter)
+    globalFilterFn: "fuzzy",
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(), //client side filtering
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
@@ -139,8 +116,7 @@ export default function UserTable() {
     debugColumns: false,
   });
 
-  //apply the fuzzy sort if the fullName column is being filtered
-  React.useEffect(() => {
+  useEffect(() => {
     if (table.getState().columnFilters[0]?.id === "fullName") {
       if (table.getState().sorting[0]?.id !== "fullName") {
         table.setSorting([{ id: "fullName", desc: false }]);
@@ -158,6 +134,14 @@ export default function UserTable() {
           <Skeleton className="h-20 w-[300px]" />
         </div>
         <Skeleton className="h-[70vh] w-full" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="container mx-auto p-6 text-red-500">
+        Error: {errorMessage}
       </div>
     );
   }
@@ -180,107 +164,72 @@ export default function UserTable() {
       </div>
       <div className="h-2 w-full" />
 
-      {errorMessage && <div className="text-red-500">{errorMessage}</div>}
-
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <table className="w-full text-left">
-            <thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <th
-                        key={header.id}
-                        colSpan={header.colSpan}
-                        className="capitalize pl-2 py-3 bg-gray-200"
-                      >
-                        {header.isPlaceholder ? null : (
-                          <>
-                            <div
-                              {...{
-                                className: header.column.getCanSort()
-                                  ? "cursor-pointer select-none flex items-center gap-x-3 hover:underline"
-                                  : "",
-                                onClick:
-                                  header.column.getToggleSortingHandler(),
-                              }}
-                            >
-                              {flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                              {{
-                                asc: (
-                                  <span className="">
-                                    <ArrowUpIcon fill="#2F4F4F" />
-                                  </span>
-                                ),
-                                desc: (
-                                  <span className="">
-                                    <ArrowDownIcon fill="#2F4F4F" />
-                                  </span>
-                                ),
-                              }[header.column.getIsSorted() as string] ?? null}
-                            </div>
-                          </>
-                        )}
-                      </th>
-                    );
-                  })}
-                </tr>
+      <table className="w-full text-left">
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  className="capitalize pl-2 py-3 bg-gray-200"
+                >
+                  {header.isPlaceholder ? null : (
+                    <div
+                      className={
+                        header.column.getCanSort()
+                          ? "cursor-pointer select-none flex items-center gap-x-3 hover:underline"
+                          : ""
+                      }
+                      onClick={header.column.getToggleSortingHandler()}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                      {{
+                        asc: <ArrowUpIcon fill="#2F4F4F" />,
+                        desc: <ArrowDownIcon fill="#2F4F4F" />,
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </div>
+                  )}
+                </th>
               ))}
-            </thead>
-            <tbody>
-              {table.getRowModel().rows.map((row, i) => {
-                // console.log("Row Details: ", row.original._id);
-                return (
-                  <tr
-                    onClick={() => router.push(`/user/${row.original.id}`)}
-                    key={row.id}
-                    className="border-b cursor-pointer hover:bg-gray-100"
-                  >
-                    {row.getVisibleCells().map((cell) => {
-                      return (
-                        <td key={cell.id} className="px-3.5 py-2">
-                          {/* <Link href={`/user/${row.original._id}`}> */}
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                          {/* </Link> */}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </>
-      )}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr
+              onClick={() => router.push(`/user/${row.original.id}`)}
+              key={row.id}
+              className="border-b cursor-pointer hover:bg-gray-100"
+            >
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="px-3.5 py-2">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-      {/* pagination */}
       <div className="flex items-center justify-end mt-4 gap-2">
         <button
-          onClick={() => {
-            table.previousPage();
-          }}
+          onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
           className="p-1 border border-gray-300 px-2 disabled:opacity-30"
         >
           {"<"}
         </button>
         <button
-          onClick={() => {
-            table.nextPage();
-          }}
+          onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
           className="p-1 border border-gray-300 px-2 disabled:opacity-30"
-        ></button>
-
+        >
+          {">"}
+        </button>
         <span className="flex items-center gap-1">
           <div>Page</div>
           <strong>
@@ -318,7 +267,6 @@ export default function UserTable() {
   );
 }
 
-// A typical debounced input react component
 function DebouncedInput({
   value: initialValue,
   onChange,
@@ -341,7 +289,7 @@ function DebouncedInput({
     }, debounce);
 
     return () => clearTimeout(timeout);
-  }, [value]);
+  }, [value, onChange, debounce]);
 
   return (
     <input

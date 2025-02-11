@@ -3,10 +3,11 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
-import { IUser } from "@/lib/types/user";
+import { IUser, IUsers, IUserData } from "@/lib/types/user";
 import { queryWithErrorHandling } from "@/hooks/queryWithErrorHandling";
 
-const usersService = new ApiService<IUser[], IUser>("/users");
+// const usersService = new ApiService<IUsers, IUser>("/users");
+const usersService = new ApiService<IUsers, IUserData>("/users");
 
 // mutation utility
 function usersMutation<T>(
@@ -46,7 +47,14 @@ function usersQuery<TData = IUser | IUser[]>(
   );
 }
 
-const UsersAdapter = {
+// Define the type for UsersAdapter
+interface IUsersAdapter {
+  getAllUsers: () => Promise<IUsers>;
+  getUserDetails: (id: string | number) => Promise<IUserData>;
+  editUserDetails: (payload: any, params: string) => Promise<any>;
+}
+
+const UsersAdapter: IUsersAdapter = {
   getAllUsers: async function () {
     const res = await usersService.getAll("/");
     return res;

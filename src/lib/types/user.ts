@@ -45,3 +45,12 @@ export interface IUser {
   supportTickets: ISupportTicket[];
   appRatings: IRating[];
 }
+
+export interface IUserData {
+  success: boolean;
+  user: IUser;
+}
+
+export interface IUsers {
+  data: IUser[];
+}

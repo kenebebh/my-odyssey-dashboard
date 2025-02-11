@@ -5,6 +5,7 @@ import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
 import { IExperience, ILimitedExperiences } from "@/lib/types/experiences";
 import { IEventData } from "@/lib/types/event";
+import { queryWithErrorHandling } from "@/hooks/queryWithErrorHandling";
 
 const experienceService = new ApiService<IExperience[], IExperience>(
   "/top-experiences"
@@ -25,16 +26,30 @@ function experiencesMutation<T>(
 }
 
 // query utility
-function experiencesQuery<B>(
-  queryCallback: QueryCallBack<B>,
+// function experiencesQuery<B>(
+//   queryCallback: QueryCallBack<B>,
+//   queryKey: string[],
+//   params: string | number
+// ) {
+//   return useQuery({
+//     queryKey: queryKey,
+//     queryFn: () => queryCallback(params),
+//     retry: 3,
+//   });
+// }
+
+// query utility with error handling
+function experiencesQuery<TData = IExperience | IExperience[]>(
+  queryCallback: QueryCallBack<TData>,
   queryKey: string[],
   params: string | number
 ) {
-  return useQuery({
-    queryKey: queryKey,
-    queryFn: () => queryCallback(params),
-    retry: 3,
-  });
+  return queryWithErrorHandling<TData, unknown, TData, string[]>(
+    queryCallback,
+    queryKey,
+    params,
+    { retry: 3 }
+  );
 }
 
 const TopExperienceAdapter = {

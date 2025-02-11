@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usersQuery, UsersAdapter } from "@/adapters";
-import { IUser } from "@/lib/types/user";
+import { IUser, IUserData } from "@/lib/types/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,15 +12,14 @@ import { DateFormatter, GoBackButton } from "../helpers";
 import { UserDetailsSkeleton } from "./user-details-skeleton";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
-  const {
-    data: user,
-    isError,
-    error,
-    isLoading,
-    errorMessage,
-  } = usersQuery<IUser>(UsersAdapter.getUserDetails, ["user", userID], userID);
+  const { data, isError, error, isLoading, errorMessage } =
+    usersQuery<IUserData>(
+      UsersAdapter.getUserDetails,
+      ["user", userID],
+      userID
+    );
 
-  console.log(errorMessage);
+  const user = data?.user;
 
   if (isLoading) {
     return <UserDetailsSkeleton />;

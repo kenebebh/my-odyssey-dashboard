@@ -37,6 +37,7 @@ export default function Contentupdate() {
     isError,
     error,
     isLoading,
+    errorMessage,
   } = eventsQuery<IEventLimit>(
     EventsAdapter.getEventsByLimit,
     ["events", String(limit)],
@@ -47,8 +48,8 @@ export default function Contentupdate() {
   const {
     data: experiences,
     isError: isErrorExperience,
-    error: errorExperience,
     isLoading: loadingExperience,
+    errorMessage: experiencesError,
   } = experiencesQuery<ILimitedExperiences>(
     TopExperienceAdapter.getLimitedExperiences,
     ["top-experiences", String(limit)],
@@ -84,7 +85,9 @@ export default function Contentupdate() {
               </div>
             ))
           ) : isError ? (
-            <div>Error: {error.message}</div>
+            <div className="container mx-auto p-6 text-red-500">
+              Error: {errorMessage}
+            </div>
           ) : (
             <>
               {events?.data.map((event) => (
@@ -120,7 +123,7 @@ export default function Contentupdate() {
               </div>
             ))
           ) : isErrorExperience ? (
-            <div>Error: {errorExperience.message}</div>
+            <div>Error: {experiencesError}</div>
           ) : (
             <>
               {experiences?.data.map((experience) => (
