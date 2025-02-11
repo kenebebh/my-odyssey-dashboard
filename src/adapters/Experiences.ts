@@ -52,7 +52,18 @@ function experiencesQuery<TData = IExperience | IExperience[]>(
   );
 }
 
-const TopExperienceAdapter = {
+// Interface for the TopExperienceAdapter
+interface ITopExperienceAdapter {
+  getAllExperiences: () => Promise<IExperience[]>;
+  getLimitedExperiences: (
+    limit: number | string
+  ) => Promise<ILimitedExperiences>;
+  getExperienceDetails: (id: string | number) => Promise<IExperience>;
+  editExperienceDetails: (payload: any, params: string) => Promise<any>;
+  deleteExperience: (id: string) => Promise<void>;
+}
+
+const TopExperienceAdapter: ITopExperienceAdapter = {
   getAllExperiences: async function () {
     const res = await experienceService.getAll("/");
     return res;

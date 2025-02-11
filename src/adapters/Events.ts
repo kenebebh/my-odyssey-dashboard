@@ -21,19 +21,6 @@ function eventsMutation<T>(
   });
 }
 
-// query utility
-// function eventsQuery<B>(
-//   queryCallback: QueryCallBack<B>,
-//   queryKey: string[],
-//   params: string | number
-// ) {
-//   return useQuery({
-//     queryKey: queryKey,
-//     queryFn: () => queryCallback(params),
-//     retry: 3,
-//   });
-// }
-
 function eventsQuery<TData = IEventData[] | IEventData>(
   queryCallback: QueryCallBack<TData>,
   queryKey: string[],
@@ -47,7 +34,16 @@ function eventsQuery<TData = IEventData[] | IEventData>(
   );
 }
 
-const EventsAdapter = {
+// Interface for the EventsAdapter
+interface IEventsAdapter {
+  getAllEvents: () => Promise<IEventData[]>;
+  getEventsByLimit: (limit: number | string) => Promise<IEventLimit>;
+  getEventDetails: (id: string | number) => Promise<IEventData>;
+  editEventDetails: (payload: any, params: string) => Promise<any>;
+  deleteEvent: (id: string) => Promise<void>;
+}
+
+const EventsAdapter: IEventsAdapter = {
   getAllEvents: async function () {
     const res = await eventService.getAll("/");
     return res;
