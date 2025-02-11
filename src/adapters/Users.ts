@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
 import { IUser, IUsers, IUserData } from "@/lib/types/user";
@@ -34,7 +34,7 @@ function usersMutation<T>(
 // }
 
 // query utility with error handling
-function usersQuery<TData = IUser | IUser[]>(
+function usersQuery<TData = IUsers | IUserData>(
   queryCallback: QueryCallBack<TData>,
   queryKey: string[],
   params: string

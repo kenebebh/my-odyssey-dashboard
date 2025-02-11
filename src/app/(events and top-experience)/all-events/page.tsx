@@ -2,21 +2,21 @@
 
 import { Button } from "@/components/ui/button";
 import { eventsQuery, EventsAdapter } from "@/adapters";
-import { IEventData } from "@/lib/types/event";
+import { IEventData, IEvents } from "@/lib/types/event";
 import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { GoBackButton } from "@/components/helpers";
 
 export default function AllEvents() {
-  const {
-    data: events,
-    isError,
-    error,
-    isLoading,
-    errorMessage,
-  } = eventsQuery<IEventData[]>(EventsAdapter.getAllEvents, ["allEvents"], "");
+  const { data, isError, isLoading, errorMessage } = eventsQuery<IEvents>(
+    EventsAdapter.getAllEvents,
+    ["allEvents"],
+    ""
+  );
 
+  const events = data?.data;
+  // console.log(events);
   // console.log(errorMessage);
 
   if (isError) {

@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { IExperience } from "@/lib/types/experiences";
+import type { IExperience } from "@/lib/types/experiences";
 
 interface ExperienceCardProps {
   experience: IExperience;
@@ -65,11 +65,11 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
         </div>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <button className="w-full">
-          <Link href={`/all-top-experiences/${experience.id}`}>
+        <Link href={`/all-top-experiences/${experience.id}`} className="w-full">
+          <Button variant="secondary" className="w-full">
             View Experience
-          </Link>
-        </button>
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

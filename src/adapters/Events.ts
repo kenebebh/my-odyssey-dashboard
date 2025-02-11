@@ -1,14 +1,14 @@
 "use client";
 
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
-import { IEventData, IEventLimit } from "@/lib/types/event";
+import { IEvent, IEventData, IEventLimit, IEvents } from "@/lib/types/event";
 import { queryWithErrorHandling } from "@/hooks/queryWithErrorHandling";
 
-const eventService = new ApiService<IEventData[], IEventData>("/events");
+const eventService = new ApiService<IEvents, IEventData>("/events");
 
-const eventQueryService = new ApiService<IEventLimit, IEventData>("/events");
+const eventQueryService = new ApiService<IEventLimit, IEvent>("/events");
 
 // mutation utility
 function eventsMutation<T>(
@@ -21,7 +21,7 @@ function eventsMutation<T>(
   });
 }
 
-function eventsQuery<TData = IEventData[] | IEventData>(
+function eventsQuery<TData = IEvents | IEventData>(
   queryCallback: QueryCallBack<TData>,
   queryKey: string[],
   params: string | number
@@ -36,7 +36,7 @@ function eventsQuery<TData = IEventData[] | IEventData>(
 
 // Interface for the EventsAdapter
 interface IEventsAdapter {
-  getAllEvents: () => Promise<IEventData[]>;
+  getAllEvents: () => Promise<IEvents>;
   getEventsByLimit: (limit: number | string) => Promise<IEventLimit>;
   getEventDetails: (id: string | number) => Promise<IEventData>;
   editEventDetails: (payload: any, params: string) => Promise<any>;

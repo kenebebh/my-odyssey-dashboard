@@ -35,7 +35,6 @@ export default function Contentupdate() {
   const {
     data: events,
     isError,
-    error,
     isLoading,
     errorMessage,
   } = eventsQuery<IEventLimit>(

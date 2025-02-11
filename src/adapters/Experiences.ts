@@ -1,10 +1,9 @@
 "use client";
 
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
 import { IExperience, ILimitedExperiences } from "@/lib/types/experiences";
-import { IEventData } from "@/lib/types/event";
 import { queryWithErrorHandling } from "@/hooks/queryWithErrorHandling";
 
 const experienceService = new ApiService<IExperience[], IExperience>(

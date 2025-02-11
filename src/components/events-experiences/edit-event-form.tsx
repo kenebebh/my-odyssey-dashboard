@@ -27,16 +27,12 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { IEventData } from "@/lib/types/event";
+import { IEvent } from "@/lib/types/event";
 
 // Define a type for the possible ad status values
 type AdStatus = "Running" | "Paused" | "Ended";
 
-export default function EditEventForm({
-  eventData,
-}: {
-  eventData: IEventData;
-}) {
+export default function EditEventForm({ eventData }: { eventData: IEvent }) {
   const [startDate, setStartDate] = useState<Date | undefined>(
     eventData.startDate ? new Date(eventData.startDate) : undefined
   );

@@ -22,18 +22,13 @@ import { DateFormatter, GoBackButton } from "@/components/helpers";
 export default function EventDetails({ params }: { params: { id: string } }) {
   const eventID = params.id;
 
-  const {
-    data: EventDetails,
-    isError,
-    error,
-    isLoading,
-    errorMessage,
-  } = eventsQuery<IEventData>(
+  const { data, isError, isLoading, errorMessage } = eventsQuery<IEventData>(
     EventsAdapter.getEventDetails,
     ["event", eventID],
     eventID
   );
-  console.log(errorMessage);
+
+  const EventDetails = data?.event;
 
   if (isError) {
     return <div>Error: {errorMessage}</div>;

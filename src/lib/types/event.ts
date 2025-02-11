@@ -5,7 +5,7 @@ interface EventMetrics {
   ticketsBooked: number;
 }
 
-export interface IEventData {
+export interface IEvent {
   createdAt: string;
   id: string;
   name: string;
@@ -26,6 +26,15 @@ export interface IEventData {
   metrics: EventMetrics; // Metrics data with specific types for each
 }
 
+export interface IEventData {
+  success: boolean;
+  event: IEvent;
+}
+
+export interface IEvents {
+  data: IEvent[];
+}
+
 export interface IEventLimit {
-  data: IEventData[];
+  data: IEvent[];
 }

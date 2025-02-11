@@ -9,11 +9,11 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { IEventData } from "@/lib/types/event";
+import { IEvent } from "@/lib/types/event";
 import { DateFormatter } from "../helpers";
 
 interface EventCardProps {
-  event: IEventData;
+  event: IEvent;
 }
 
 export default function EventCard({ event }: EventCardProps) {
