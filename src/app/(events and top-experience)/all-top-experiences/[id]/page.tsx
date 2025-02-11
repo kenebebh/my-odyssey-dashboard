@@ -16,7 +16,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import Image from "next/image";
-import type { IExperience } from "@/lib/types/experiences";
+import type { IExperienceData } from "@/lib/types/experiences";
 import { EditExperienceForm } from "@/components/events-experiences";
 import { GoBackButton } from "@/components/helpers";
 
@@ -27,21 +27,21 @@ export default function TopExperienceDetails({
 }) {
   const experienceID = params.id;
 
-  const {
-    data: ExperienceDetails,
-    isError,
-    error,
-    isLoading,
-  } = experiencesQuery<IExperience>(
-    TopExperienceAdapter.getExperienceDetails,
-    ["experience", experienceID],
-    experienceID
-  );
+  const { data, isError, isLoading, errorMessage } =
+    experiencesQuery<IExperienceData>(
+      TopExperienceAdapter.getExperienceDetails,
+      ["experience", experienceID],
+      experienceID
+    );
 
-  console.log(ExperienceDetails);
+  const ExperienceDetails = data?.experience;
 
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="container mx-auto p-6 text-red-500">
+        Error: {errorMessage}
+      </div>
+    );
   }
 
   if (!ExperienceDetails) {

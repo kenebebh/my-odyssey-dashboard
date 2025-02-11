@@ -3,15 +3,20 @@
 import { useMutation } from "@tanstack/react-query";
 import { type MutationCallBack, type QueryCallBack } from "./helpers";
 import { ApiService } from "@/services";
-import { IExperience, ILimitedExperiences } from "@/lib/types/experiences";
+import {
+  ITopExperiences,
+  IExperienceData,
+  ILimitedExperiences,
+} from "@/lib/types/experiences";
 import { queryWithErrorHandling } from "@/hooks/queryWithErrorHandling";
 
-const experienceService = new ApiService<IExperience[], IExperience>(
+const experienceService = new ApiService<ITopExperiences, IExperienceData>(
   "/top-experiences"
 );
-const experienceQueryService = new ApiService<ILimitedExperiences, IExperience>(
-  "/top-experiences"
-);
+const experienceQueryService = new ApiService<
+  ILimitedExperiences,
+  IExperienceData
+>("/top-experiences");
 
 //mutation utility
 function experiencesMutation<T>(
@@ -38,7 +43,7 @@ function experiencesMutation<T>(
 // }
 
 // query utility with error handling
-function experiencesQuery<TData = IExperience | IExperience[]>(
+function experiencesQuery<TData = IExperienceData | ITopExperiences>(
   queryCallback: QueryCallBack<TData>,
   queryKey: string[],
   params: string | number
@@ -53,11 +58,11 @@ function experiencesQuery<TData = IExperience | IExperience[]>(
 
 // Interface for the TopExperienceAdapter
 interface ITopExperienceAdapter {
-  getAllExperiences: () => Promise<IExperience[]>;
+  getAllExperiences: () => Promise<ITopExperiences>;
   getLimitedExperiences: (
     limit: number | string
   ) => Promise<ILimitedExperiences>;
-  getExperienceDetails: (id: string | number) => Promise<IExperience>;
+  getExperienceDetails: (id: string | number) => Promise<IExperienceData>;
   editExperienceDetails: (payload: any, params: string) => Promise<any>;
   deleteExperience: (id: string) => Promise<void>;
 }

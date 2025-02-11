@@ -14,6 +14,15 @@ export interface IExperience {
   };
 }
 
+export interface IExperienceData {
+  success: boolean;
+  experience: IExperience;
+}
+
+export interface ITopExperiences {
+  data: IExperience[];
+}
+
 export interface ILimitedExperiences {
   data: IExperience[];
 }
