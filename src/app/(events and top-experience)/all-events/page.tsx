@@ -7,20 +7,23 @@ import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { GoBackButton } from "@/components/helpers";
+import { DisplayErrorMessage } from "@/utils/displayErrorMessage";
 
 export default function AllEvents() {
-  const { data, isError, isLoading, errorMessage } = eventsQuery<IEvents>(
-    EventsAdapter.getAllEvents,
-    ["allEvents"],
-    ""
-  );
+  const { data, isError, isLoading, errorMessage, refetch } =
+    eventsQuery<IEvents>(EventsAdapter.getAllEvents, ["allEvents"], "");
 
   const events = data?.data;
   // console.log(events);
   // console.log(errorMessage);
 
   if (isError) {
-    return <div>Error: {errorMessage}</div>;
+    return (
+      <DisplayErrorMessage
+        message={errorMessage || "An error occurred while fetching events."}
+        onRetry={() => refetch()}
+      />
+    );
   }
 
   return (

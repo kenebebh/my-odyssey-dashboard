@@ -18,15 +18,17 @@ import Image from "next/image";
 import { IEventData } from "@/lib/types/event";
 import { EditEventForm } from "@/components/events-experiences";
 import { DateFormatter, GoBackButton } from "@/components/helpers";
+import { DisplayErrorMessage } from "@/utils/displayErrorMessage";
 
 export default function EventDetails({ params }: { params: { id: string } }) {
   const eventID = params.id;
 
-  const { data, isError, isLoading, errorMessage } = eventsQuery<IEventData>(
-    EventsAdapter.getEventDetails,
-    ["event", eventID],
-    eventID
-  );
+  const { data, isError, isLoading, errorMessage, refetch } =
+    eventsQuery<IEventData>(
+      EventsAdapter.getEventDetails,
+      ["event", eventID],
+      eventID
+    );
 
   console.log(data);
 
@@ -34,7 +36,12 @@ export default function EventDetails({ params }: { params: { id: string } }) {
   console.log(EventDetails);
 
   if (isError) {
-    return <div>Error: {errorMessage}</div>;
+    return (
+      <DisplayErrorMessage
+        message={errorMessage || "An error occurred while fetching events."}
+        onRetry={() => refetch()}
+      />
+    );
   }
 
   return (

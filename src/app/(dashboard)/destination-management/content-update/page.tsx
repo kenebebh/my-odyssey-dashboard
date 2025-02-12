@@ -122,7 +122,9 @@ export default function Contentupdate() {
               </div>
             ))
           ) : isErrorExperience ? (
-            <div>Error: {experiencesError}</div>
+            <div className="container mx-auto p-6 text-red-500">
+              Error: {experiencesError}
+            </div>
           ) : (
             <>
               {experiences?.data.map((experience) => (
