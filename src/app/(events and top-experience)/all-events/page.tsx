@@ -23,8 +23,6 @@ export default function AllEvents() {
     return <div>Error: {errorMessage}</div>;
   }
 
-  // console.log(events);
-
   return (
     <div className="container mx-auto p-6">
       <div className="items-center justify-between flex">
@@ -61,7 +59,7 @@ export default function AllEvents() {
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {event.startDate}
                     </p>
-                    <p className="text-sm text-gray-700 mb-4">
+                    <p className="text-sm text-gray-700 mb-4 line-clamp-2">
                       {event.description}
                     </p>
                     <Button variant="outline" className="w-full">
