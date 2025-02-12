@@ -30,10 +30,10 @@ export default function EventDetails({ params }: { params: { id: string } }) {
       eventID
     );
 
-  console.log(data);
+  // console.log(data);
 
   const EventDetails = data?.event;
-  console.log(EventDetails);
+  // console.log(EventDetails);
 
   if (isError) {
     return (

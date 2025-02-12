@@ -17,7 +17,7 @@ interface ExperienceCardProps {
 
 export default function ExperienceCard({ experience }: ExperienceCardProps) {
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden flex flex-col h-full">
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
           <Image
@@ -33,7 +33,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="p-4">
+      <CardContent className="p-4 flex-grow">
         <h3 className="font-semibold text-xl mb-2">{experience.name}</h3>
         <div className="flex items-center text-sm text-gray-600 mb-2">
           <MapPinIcon className="mr-2 h-4 w-4" />
@@ -55,7 +55,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
             <span>{experience.votes} votes</span>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2 mt-2">
+        <div className="flex flex-wrap gap-2 mt-4">
           {experience.tags.map((tag) => (
             <Badge key={tag} variant="secondary" className="text-xs">
               <TagIcon className="mr-1 h-3 w-3" />
@@ -64,7 +64,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
           ))}
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-4 pt-0 mt-auto">
         <Link href={`/all-top-experiences/${experience.id}`} className="w-full">
           <Button variant="secondary" className="w-full">
             View Experience

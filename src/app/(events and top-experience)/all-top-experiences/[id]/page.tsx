@@ -44,10 +44,6 @@ export default function TopExperienceDetails({
     );
   }
 
-  if (!ExperienceDetails) {
-    notFound();
-  }
-
   return (
     <div className="container mx-auto p-6 space-y-8">
       <div className="flex justify-between items-center">
