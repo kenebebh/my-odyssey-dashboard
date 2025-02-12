@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EventCard, ExperienceCard } from "@/components/events-experiences";
 
 import Link from "next/link";
+import { DisplayErrorMessage } from "@/utils/displayErrorMessage";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr =
@@ -37,6 +38,7 @@ export default function Contentupdate() {
     isError,
     isLoading,
     errorMessage,
+    refetch,
   } = eventsQuery<IEventLimit>(
     EventsAdapter.getEventsByLimit,
     ["events", String(limit)],
@@ -49,6 +51,7 @@ export default function Contentupdate() {
     isError: isErrorExperience,
     isLoading: loadingExperience,
     errorMessage: experiencesError,
+    refetch: refetchExperience,
   } = experiencesQuery<ILimitedExperiences>(
     TopExperienceAdapter.getLimitedExperiences,
     ["top-experiences", String(limit)],
@@ -84,9 +87,12 @@ export default function Contentupdate() {
               </div>
             ))
           ) : isError ? (
-            <div className="container mx-auto p-6 text-red-500">
-              Error: {errorMessage}
-            </div>
+            <DisplayErrorMessage
+              message={
+                errorMessage || "An error occured while fetching events."
+              }
+              onRetry={() => refetch()}
+            />
           ) : (
             <>
               {events?.data.map((event) => (
@@ -122,9 +128,12 @@ export default function Contentupdate() {
               </div>
             ))
           ) : isErrorExperience ? (
-            <div className="container mx-auto p-6 text-red-500">
-              Error: {experiencesError}
-            </div>
+            <DisplayErrorMessage
+              message={
+                experiencesError || "An error occured while fetching events."
+              }
+              onRetry={() => refetchExperience()}
+            />
           ) : (
             <>
               {experiences?.data.map((experience) => (

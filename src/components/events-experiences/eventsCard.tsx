@@ -50,7 +50,7 @@ export default function EventCard({ event }: EventCardProps) {
         </p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <button className="w-full">
+        <button className="w-full bg-stone-200 py-2 rounded-md">
           <Link href={`/all-events/${event.id}`}>View Event</Link>
         </button>
       </CardFooter>

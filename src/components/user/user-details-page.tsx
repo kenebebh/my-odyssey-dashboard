@@ -10,9 +10,10 @@ import { TicketIcon, StarIcon } from "lucide-react";
 import EditUserForm from "./edit-user-form";
 import { DateFormatter, GoBackButton } from "../helpers";
 import { UserDetailsSkeleton } from "./user-details-skeleton";
+import { DisplayErrorMessage } from "@/utils/displayErrorMessage";
 
 export default function UserDetailsPage({ userID }: { userID: string }) {
-  const { data, isError, error, isLoading, errorMessage } =
+  const { data, isError, error, isLoading, errorMessage, refetch } =
     usersQuery<IUserData>(
       UsersAdapter.getUserDetails,
       ["user", userID],
@@ -27,9 +28,10 @@ export default function UserDetailsPage({ userID }: { userID: string }) {
 
   if (isError) {
     return (
-      <div className="container mx-auto p-6 text-red-500">
-        Error: {errorMessage}
-      </div>
+      <DisplayErrorMessage
+        message={errorMessage || "An error occured while fetching events."}
+        onRetry={() => refetch()}
+      />
     );
   }
 

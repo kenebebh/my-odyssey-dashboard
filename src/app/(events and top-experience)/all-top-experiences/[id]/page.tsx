@@ -19,6 +19,7 @@ import Image from "next/image";
 import type { IExperienceData } from "@/lib/types/experiences";
 import { EditExperienceForm } from "@/components/events-experiences";
 import { GoBackButton } from "@/components/helpers";
+import { DisplayErrorMessage } from "@/utils/displayErrorMessage";
 
 export default function TopExperienceDetails({
   params,
@@ -27,7 +28,7 @@ export default function TopExperienceDetails({
 }) {
   const experienceID = params.id;
 
-  const { data, isError, isLoading, errorMessage } =
+  const { data, isError, isLoading, errorMessage, refetch } =
     experiencesQuery<IExperienceData>(
       TopExperienceAdapter.getExperienceDetails,
       ["experience", experienceID],
@@ -38,9 +39,10 @@ export default function TopExperienceDetails({
 
   if (isError) {
     return (
-      <div className="container mx-auto p-6 text-red-500">
-        Error: {errorMessage}
-      </div>
+      <DisplayErrorMessage
+        message={errorMessage || "An error occured while fetching events."}
+        onRetry={() => refetch()}
+      />
     );
   }
 

@@ -23,6 +23,7 @@ import {
 } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { type RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
+import { DisplayErrorMessage } from "@/utils/displayErrorMessage";
 
 declare module "@tanstack/react-table" {
   interface FilterFns {
@@ -49,6 +50,7 @@ export default function UserTable() {
     isError,
     isLoading,
     errorMessage,
+    refetch,
   } = usersQuery<IUsers>(UsersAdapter.getAllUsers, ["allUsers"], "");
 
   console.log(users);
@@ -140,9 +142,10 @@ export default function UserTable() {
 
   if (isError) {
     return (
-      <div className="container mx-auto p-6 text-red-500">
-        Error: {errorMessage}
-      </div>
+      <DisplayErrorMessage
+        message={errorMessage || "An error occured while fetching events."}
+        onRetry={() => refetch()}
+      />
     );
   }
 
