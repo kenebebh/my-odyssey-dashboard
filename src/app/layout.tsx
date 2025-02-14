@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Header, Sidebar } from "@/components/layout";
+import { Header, AppSidebar } from "@/components/layout";
 import { TanstackProvider } from "@/providers";
 import { Toaster } from "@/components/ui/toaster";
 import Loading from "./loading";
@@ -7,6 +7,7 @@ import { inter } from "./ui/fonts";
 import { sans } from "./ui/fonts";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "@/components/partials/general-modules";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 import "./globals.css";
 import { Suspense } from "react";
@@ -28,7 +29,10 @@ export default function RootLayout({
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <section className="grid grid-cols-1 lg:grid-cols-[290px,1fr]">
               <div className="hidden lg:flex">
-                <Sidebar />
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                </SidebarProvider>
               </div>
 
               <div className="max-w-full p-2 flex flex-col gap-y-3">
