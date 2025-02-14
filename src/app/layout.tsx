@@ -28,22 +28,22 @@ export default function RootLayout({
         <TanstackProvider>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <section className="grid grid-cols-1 lg:grid-cols-[290px,1fr]">
-              <div className="hidden lg:flex">
-                <SidebarProvider>
+              <SidebarProvider>
+                <div className="hidden lg:flex">
                   <AppSidebar />
                   <SidebarTrigger />
-                </SidebarProvider>
-              </div>
-
-              <div className="max-w-full p-2 flex flex-col gap-y-3">
-                <div>
-                  <Header />
                 </div>
-                <Suspense fallback={<Loading />}>
-                  <div>{children}</div>
-                </Suspense>
-                <Toaster />
-              </div>
+
+                <div className="max-w-full p-2 flex flex-col gap-y-3">
+                  <div>
+                    <Header />
+                  </div>
+                  <Suspense fallback={<Loading />}>
+                    <div>{children}</div>
+                  </Suspense>
+                  <Toaster />
+                </div>
+              </SidebarProvider>
             </section>
           </ErrorBoundary>
         </TanstackProvider>

@@ -96,7 +96,7 @@ export default function AppSidebar() {
     //     })}
     //   </div>
     // </div>
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
