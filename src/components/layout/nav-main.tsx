@@ -48,7 +48,7 @@ export function NavMain({
             isActive={pathname === "/"}
           >
             <Link href="/">
-              <Home className="size-4" />
+              <Home className="size-4" color="#0077B6" />
               <span>Dashboard</span>
             </Link>
           </SidebarMenuButton>
