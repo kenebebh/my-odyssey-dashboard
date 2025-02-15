@@ -35,8 +35,8 @@ export const items = [
     icon: <RocketIcon color="#0077B6" />,
     items: [
       {
-        name: "Content Update",
-        url: "/destination-management/content-update",
+        name: "Events and Top Experiences",
+        url: "/destination-management/events-experiences",
       },
       {
         name: "Travel Trends",
