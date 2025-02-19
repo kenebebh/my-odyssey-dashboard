@@ -9,13 +9,13 @@ interface ErrorMessageProps {
 export function DisplayErrorMessage({ message, onRetry }: ErrorMessageProps) {
   return (
     <div className="flex items-center justify-center min-h-[50vh]">
-      <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-6 max-w-md w-full">
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 rounded-lg shadow-lg p-6 max-w-md w-full">
         <div className="flex flex-col items-center text-center">
           <AlertTriangle className="h-12 w-12 text-yellow-500 mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <h3 className="text-xl font-semibold text-gray-900 mb-2 dark:text-white">
             Oops! Something went wrong
           </h3>
-          <p className="text-gray-600 mb-6">{message}</p>
+          <p className="text-gray-600 mb-6 dark:text-stone-200">{message}</p>
           {onRetry && (
             <Button
               onClick={onRetry}
