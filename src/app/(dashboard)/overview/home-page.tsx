@@ -9,7 +9,7 @@ import {
 export default function HomePage() {
   return (
     <div className="h-full flex flex-col gap-y-10">
-      <div className="flex gap-x-2 items-center w-full flex-wrap gap-y-5">
+      <div className="flex gap-x-4 items-center justify-center w-full flex-wrap gap-y-5">
         <OverviewCard
           title="Total Users"
           icon={<PersonIcon color="#0077B6" />}
@@ -32,14 +32,14 @@ export default function HomePage() {
         />
       </div>
 
-      <div className="flex justify-evenly">
+      <div className="flex flex-col lg:flex-row flex-wrap gap-y-8 justify-evenly">
         <RevenueCard />
 
         <MostVisitedCountriesChart />
-      </div>
-      <div>
+
         <RevenueVsExpensesChart />
       </div>
+      <div></div>
     </div>
   );
 }
