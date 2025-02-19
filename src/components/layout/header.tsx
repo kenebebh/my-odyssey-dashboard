@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { BellIcon, MessageSquareIcon, SettingsIcon } from "lucide-react";
+import { ThemeToggle } from "../helpers";
 
 export default function Header() {
   return (
@@ -50,6 +51,7 @@ export default function Header() {
             </p>
           </div>
         </div>
+        <ThemeToggle />
       </div>
     </header>
   );

@@ -8,6 +8,7 @@ import { sans } from "./ui/fonts";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "@/components/partials/general-modules";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ThemeProvider } from "@/components/helpers";
 
 import "./globals.css";
 import { Suspense } from "react";
@@ -26,26 +27,28 @@ export default function RootLayout({
     <html lang={"en"}>
       <body className={`${inter.className} ${sans.className} antialiased`}>
         <TanstackProvider>
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <section className="grid grid-cols-1 lg:grid-cols-[290px,1fr]">
-              <div className="hidden lg:flex">
-                <SidebarProvider>
-                  <AppSidebar />
-                  <SidebarTrigger />
-                </SidebarProvider>
-              </div>
-
-              <div className="max-w-full p-2 flex flex-col gap-y-3">
-                <div>
-                  <Header />
+          <ThemeProvider>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <section className="grid grid-cols-1 lg:grid-cols-[290px,1fr]">
+                <div className="hidden lg:flex">
+                  <SidebarProvider>
+                    <AppSidebar />
+                    <SidebarTrigger />
+                  </SidebarProvider>
                 </div>
-                <Suspense fallback={<Loading />}>
-                  <div>{children}</div>
-                </Suspense>
-                <Toaster />
-              </div>
-            </section>
-          </ErrorBoundary>
+
+                <div className="max-w-full p-2 flex flex-col gap-y-3">
+                  <div>
+                    <Header />
+                  </div>
+                  <Suspense fallback={<Loading />}>
+                    <div>{children}</div>
+                  </Suspense>
+                  <Toaster />
+                </div>
+              </section>
+            </ErrorBoundary>
+          </ThemeProvider>
         </TanstackProvider>
       </body>
     </html>
