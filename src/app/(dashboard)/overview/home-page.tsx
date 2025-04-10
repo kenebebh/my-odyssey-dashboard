@@ -39,7 +39,6 @@ export default function HomePage() {
 
         <RevenueVsExpensesChart />
       </div>
-      <div></div>
     </div>
   );
 }

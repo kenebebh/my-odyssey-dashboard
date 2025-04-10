@@ -18,9 +18,9 @@ import { items } from "@/data/links";
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Banigo Kenebbh",
+    email: "kenebebhbanigo@gmail.com",
+    avatar: "KB",
   },
 };
 

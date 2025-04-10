@@ -5,7 +5,7 @@ import { ThemeToggle } from "../helpers";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-end h-16 px-6 border-b dark:bg-gray-800 dark:border-gray-700">
+    <header className="flex items-center justify-end h-16 px-6 border-b dark:border-gray-800">
       <div className="flex items-center space-x-4">
         <Button
           variant="ghost"
